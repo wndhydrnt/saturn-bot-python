@@ -1,0 +1,12 @@
+name: Skywalking Eyes
+
+on:
+  pull_request: {}
+
+jobs:
+  license:
+    name: Ensure all files contain MPL 2.0 header
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - uses: apache/skywalking-eyes/header@ed436a5593c63a25f394ea29da61b0ac3731a9fe
