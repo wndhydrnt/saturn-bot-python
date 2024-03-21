@@ -9,7 +9,7 @@ from saturn_sync.protocol.v1.saturnsync_pb2 import (
     FilterLineInFile,
     FilterRepositoryName,
 )
-from saturn_sync.sdk import register_task
+from saturn_sync.sdk import serve_tasks
 from saturn_sync.task import Task
 
 __all__ = [
@@ -19,5 +19,5 @@ __all__ = [
     "FilterLineInFile",
     "FilterRepositoryName",
     "Task",
-    "register_task",
+    "serve_tasks",
 ]

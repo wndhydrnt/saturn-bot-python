@@ -186,7 +186,7 @@ def serve(port: int, shutdown: GRPCController, tasks: Iterable[Task]):
     return server
 
 
-def register_task(*tasks: Task) -> None:
+def serve_tasks(*tasks: Task) -> None:
     port = _find_open_port()
     grpc_controller = GRPCController()
     server = serve(port=port, shutdown=grpc_controller, tasks=tasks)
