@@ -10,6 +10,8 @@ line-length = 88
 [tool.isort]
 profile = "black"
 multi_line_output = 3
+# The following files are auto-generated. Do not check them.
+skip_glob = ["saturn_sync/plugin/*", "saturn_sync/protocol/*"]
 
 # No types are available
 # https://github.com/grpc/grpc/issues/29041
