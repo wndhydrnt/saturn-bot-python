@@ -1,0 +1,4 @@
+*.proto
+__pycache__/
+.coverage
+htmlcov/
