@@ -1,0 +1,16 @@
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    name: PyPI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: Gr1N/setup-poetry@v9
+      - run: poetry publish --build --username ${{ secrets.PUBLISH_USERNAME }} --password ${{ secrets.PUBLISH_PASSWORD }}
