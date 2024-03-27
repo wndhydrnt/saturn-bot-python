@@ -4,7 +4,7 @@
 
 from typing import Mapping, Optional
 
-from saturn_sync.protocol.v1.saturnsync_pb2 import Context, Filter
+from saturn_sync.protocol.v1.saturnsync_pb2 import Context, Filters
 
 
 class Task:
@@ -16,7 +16,7 @@ class Task:
     commit_message: str = ""
     create_only: bool = False
     disabled: bool = False
-    filters: list[Filter] = []
+    filters: Filters = Filters()
     keep_branch_after_merge: bool = False
     labels: list[str] = []
     merge_once: bool = False

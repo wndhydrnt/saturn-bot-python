@@ -1,5 +1,8 @@
+PROTOCOL_VERSION=v0.5.0
+
 clean:
-	rm protocol/v1/saturnsync.proto
+	rm saturn_sync/protocol/v1/saturnsync.proto
+	rm saturn_sync/plugin/grpc_controller.proto
 
 generate: saturn_sync/protocol/v1/saturnsync.proto saturn_sync/plugin/grpc_controller.proto
 	buf generate
@@ -10,7 +13,7 @@ generate: saturn_sync/protocol/v1/saturnsync.proto saturn_sync/plugin/grpc_contr
 
 saturn_sync/protocol/v1/saturnsync.proto:
 	mkdir -p ./saturn_sync/protocol/v1/
-	curl -L -o ./saturn_sync/protocol/v1/saturnsync.proto --silent --fail https://raw.githubusercontent.com/wndhydrnt/saturn-sync-protocol/v0.4.0/protocol/v1/saturnsync.proto
+	curl -L -o ./saturn_sync/protocol/v1/saturnsync.proto --silent --fail https://raw.githubusercontent.com/wndhydrnt/saturn-sync-protocol/$(PROTOCOL_VERSION)/protocol/v1/saturnsync.proto
 
 saturn_sync/plugin/grpc_controller.proto:
 	mkdir -p ./plugin/

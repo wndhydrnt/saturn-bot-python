@@ -4,9 +4,9 @@
 
 from saturn_sync.protocol.v1.saturnsync_pb2 import (
     Context,
-    Filter,
+    Filters,
     FilterFile,
-    FilterLineInFile,
+    FilterFileContent,
     FilterRepositoryName,
 )
 from saturn_sync.sdk import serve_tasks
@@ -14,9 +14,9 @@ from saturn_sync.task import Task
 
 __all__ = [
     "Context",
-    "Filter",
+    "Filters",
     "FilterFile",
-    "FilterLineInFile",
+    "FilterFileContent",
     "FilterRepositoryName",
     "Task",
     "serve_tasks",

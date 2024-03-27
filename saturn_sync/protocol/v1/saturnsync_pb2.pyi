@@ -91,37 +91,41 @@ class Repository(_message.Message):
     web_url: str
     def __init__(self, full_name: _Optional[str] = ..., clone_url_http: _Optional[str] = ..., clone_url_ssh: _Optional[str] = ..., web_url: _Optional[str] = ...) -> None: ...
 
-class Filter(_message.Message):
-    __slots__ = ("file", "line_in_file", "repository_name", "reverse")
-    FILE_FIELD_NUMBER: _ClassVar[int]
-    LINE_IN_FILE_FIELD_NUMBER: _ClassVar[int]
-    REPOSITORY_NAME_FIELD_NUMBER: _ClassVar[int]
-    REVERSE_FIELD_NUMBER: _ClassVar[int]
-    file: FilterFile
-    line_in_file: FilterLineInFile
-    repository_name: FilterRepositoryName
-    reverse: bool
-    def __init__(self, file: _Optional[_Union[FilterFile, _Mapping]] = ..., line_in_file: _Optional[_Union[FilterLineInFile, _Mapping]] = ..., repository_name: _Optional[_Union[FilterRepositoryName, _Mapping]] = ..., reverse: bool = ...) -> None: ...
+class Filters(_message.Message):
+    __slots__ = ("repository_names", "files", "file_contents")
+    REPOSITORY_NAMES_FIELD_NUMBER: _ClassVar[int]
+    FILES_FIELD_NUMBER: _ClassVar[int]
+    FILE_CONTENTS_FIELD_NUMBER: _ClassVar[int]
+    repository_names: _containers.RepeatedCompositeFieldContainer[FilterRepositoryName]
+    files: _containers.RepeatedCompositeFieldContainer[FilterFile]
+    file_contents: _containers.RepeatedCompositeFieldContainer[FilterFileContent]
+    def __init__(self, repository_names: _Optional[_Iterable[_Union[FilterRepositoryName, _Mapping]]] = ..., files: _Optional[_Iterable[_Union[FilterFile, _Mapping]]] = ..., file_contents: _Optional[_Iterable[_Union[FilterFileContent, _Mapping]]] = ...) -> None: ...
 
-class FilterLineInFile(_message.Message):
-    __slots__ = ("path", "search")
+class FilterFileContent(_message.Message):
+    __slots__ = ("path", "search", "reverse")
     PATH_FIELD_NUMBER: _ClassVar[int]
     SEARCH_FIELD_NUMBER: _ClassVar[int]
+    REVERSE_FIELD_NUMBER: _ClassVar[int]
     path: str
     search: str
-    def __init__(self, path: _Optional[str] = ..., search: _Optional[str] = ...) -> None: ...
+    reverse: bool
+    def __init__(self, path: _Optional[str] = ..., search: _Optional[str] = ..., reverse: bool = ...) -> None: ...
 
 class FilterFile(_message.Message):
-    __slots__ = ("path",)
+    __slots__ = ("path", "reverse")
     PATH_FIELD_NUMBER: _ClassVar[int]
+    REVERSE_FIELD_NUMBER: _ClassVar[int]
     path: str
-    def __init__(self, path: _Optional[str] = ...) -> None: ...
+    reverse: bool
+    def __init__(self, path: _Optional[str] = ..., reverse: bool = ...) -> None: ...
 
 class FilterRepositoryName(_message.Message):
-    __slots__ = ("names",)
+    __slots__ = ("names", "reverse")
     NAMES_FIELD_NUMBER: _ClassVar[int]
+    REVERSE_FIELD_NUMBER: _ClassVar[int]
     names: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, names: _Optional[_Iterable[str]] = ...) -> None: ...
+    reverse: bool
+    def __init__(self, names: _Optional[_Iterable[str]] = ..., reverse: bool = ...) -> None: ...
 
 class OnPrClosedRequest(_message.Message):
     __slots__ = ("task_name", "context")
@@ -195,6 +199,6 @@ class Task(_message.Message):
     merge_once: bool
     pr_body: str
     pr_title: str
-    filters: _containers.RepeatedCompositeFieldContainer[Filter]
+    filters: Filters
     actions: _containers.RepeatedCompositeFieldContainer[Action]
-    def __init__(self, name: _Optional[str] = ..., auto_merge: bool = ..., auto_merge_after_seconds: _Optional[int] = ..., branch_name: _Optional[str] = ..., change_limit: _Optional[int] = ..., commit_message: _Optional[str] = ..., create_only: bool = ..., disabled: bool = ..., keep_branch_after_merge: bool = ..., labels: _Optional[_Iterable[str]] = ..., merge_once: bool = ..., pr_body: _Optional[str] = ..., pr_title: _Optional[str] = ..., filters: _Optional[_Iterable[_Union[Filter, _Mapping]]] = ..., actions: _Optional[_Iterable[_Union[Action, _Mapping]]] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., auto_merge: bool = ..., auto_merge_after_seconds: _Optional[int] = ..., branch_name: _Optional[str] = ..., change_limit: _Optional[int] = ..., commit_message: _Optional[str] = ..., create_only: bool = ..., disabled: bool = ..., keep_branch_after_merge: bool = ..., labels: _Optional[_Iterable[str]] = ..., merge_once: bool = ..., pr_body: _Optional[str] = ..., pr_title: _Optional[str] = ..., filters: _Optional[_Union[Filters, _Mapping]] = ..., actions: _Optional[_Iterable[_Union[Action, _Mapping]]] = ...) -> None: ...
