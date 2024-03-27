@@ -8,7 +8,7 @@ import unittest
 from typing import Mapping
 from unittest.mock import Mock
 
-from saturn_sync import Context
+from saturn_sync import Context, Filters
 from saturn_sync.plugin.grpc_controller_pb2_grpc import GRPCController
 from saturn_sync.protocol.v1 import saturnsync_pb2
 from saturn_sync.sdk import TaskService, _find_open_port, serve
@@ -171,6 +171,7 @@ class TaskServiceTest(unittest.TestCase):
             commit_message="",
             create_only=False,
             disabled=False,
+            filters=Filters(),
             keep_branch_after_merge=False,
             merge_once=False,
             pr_body="",
