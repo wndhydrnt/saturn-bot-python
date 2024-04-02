@@ -18,7 +18,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n(saturn_sync/protocol/v1/saturnsync.proto\x12\x0bprotocol.v1\"x\n\x15\x45xecuteActionsRequest\x12\x1b\n\ttask_name\x18\x01 \x01(\tR\x08taskName\x12\x12\n\x04path\x18\x02 \x01(\tR\x04path\x12.\n\x07\x63ontext\x18\x03 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"=\n\x16\x45xecuteActionsResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"d\n\x15\x45xecuteFiltersRequest\x12\x1b\n\ttask_name\x18\x01 \x01(\tR\x08taskName\x12.\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"S\n\x16\x45xecuteFiltersResponse\x12\x14\n\x05match\x18\x01 \x01(\x08R\x05match\x12\x19\n\x05\x65rror\x18\x02 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"7\n\x10ListTasksRequest\x12#\n\rcustom_config\x18\x01 \x01(\x0cR\x0c\x63ustomConfig\"a\n\x11ListTasksResponse\x12\'\n\x05tasks\x18\x01 \x03(\x0b\x32\x11.protocol.v1.TaskR\x05tasks\x12\x19\n\x05\x65rror\x18\x02 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"C\n\x06\x41\x63tion\x12\x30\n\x04\x66ile\x18\x01 \x01(\x0b\x32\x17.protocol.v1.ActionFileH\x00R\x04\x66ile\x88\x01\x01\x42\x07\n\x05_file\"r\n\nActionFile\x12\x18\n\x07\x63ontent\x18\x01 \x01(\tR\x07\x63ontent\x12\x17\n\x04mode\x18\x02 \x01(\tH\x00R\x04mode\x88\x01\x01\x12\x12\n\x04path\x18\x03 \x01(\tR\x04path\x12\x14\n\x05state\x18\x04 \x01(\tR\x05stateB\x07\n\x05_mode\"B\n\x07\x43ontext\x12\x37\n\nrepository\x18\x01 \x01(\x0b\x32\x17.protocol.v1.RepositoryR\nrepository\"\x8c\x01\n\nRepository\x12\x1b\n\tfull_name\x18\x01 \x01(\tR\x08\x66ullName\x12$\n\x0e\x63lone_url_http\x18\x02 \x01(\tR\x0c\x63loneUrlHttp\x12\"\n\rclone_url_ssh\x18\x03 \x01(\tR\x0b\x63loneUrlSsh\x12\x17\n\x07web_url\x18\x04 \x01(\tR\x06webUrl\"\xcb\x01\n\x07\x46ilters\x12L\n\x10repository_names\x18\x01 \x03(\x0b\x32!.protocol.v1.FilterRepositoryNameR\x0frepositoryNames\x12-\n\x05\x66iles\x18\x02 \x03(\x0b\x32\x17.protocol.v1.FilterFileR\x05\x66iles\x12\x43\n\rfile_contents\x18\x03 \x03(\x0b\x32\x1e.protocol.v1.FilterFileContentR\x0c\x66ileContents\"j\n\x11\x46ilterFileContent\x12\x12\n\x04path\x18\x01 \x01(\tR\x04path\x12\x16\n\x06search\x18\x02 \x01(\tR\x06search\x12\x1d\n\x07reverse\x18\x03 \x01(\x08H\x00R\x07reverse\x88\x01\x01\x42\n\n\x08_reverse\"K\n\nFilterFile\x12\x12\n\x04path\x18\x01 \x01(\tR\x04path\x12\x1d\n\x07reverse\x18\x02 \x01(\x08H\x00R\x07reverse\x88\x01\x01\x42\n\n\x08_reverse\"W\n\x14\x46ilterRepositoryName\x12\x14\n\x05names\x18\x01 \x03(\tR\x05names\x12\x1d\n\x07reverse\x18\x02 \x01(\x08H\x00R\x07reverse\x88\x01\x01\x42\n\n\x08_reverse\"`\n\x11OnPrClosedRequest\x12\x1b\n\ttask_name\x18\x01 \x01(\tR\x08taskName\x12.\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"9\n\x12OnPrClosedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"a\n\x12OnPrCreatedRequest\x12\x1b\n\ttask_name\x18\x01 \x01(\tR\x08taskName\x12.\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\":\n\x13OnPrCreatedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"`\n\x11OnPrMergedRequest\x12\x1b\n\ttask_name\x18\x01 \x01(\tR\x08taskName\x12.\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"9\n\x12OnPrMergedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"\xa4\x06\n\x04Task\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12\"\n\nauto_merge\x18\x02 \x01(\x08H\x00R\tautoMerge\x88\x01\x01\x12<\n\x18\x61uto_merge_after_seconds\x18\x03 \x01(\x05H\x01R\x15\x61utoMergeAfterSeconds\x88\x01\x01\x12$\n\x0b\x62ranch_name\x18\x04 \x01(\tH\x02R\nbranchName\x88\x01\x01\x12&\n\x0c\x63hange_limit\x18\x05 \x01(\x05H\x03R\x0b\x63hangeLimit\x88\x01\x01\x12*\n\x0e\x63ommit_message\x18\x06 \x01(\tH\x04R\rcommitMessage\x88\x01\x01\x12$\n\x0b\x63reate_only\x18\x07 \x01(\x08H\x05R\ncreateOnly\x88\x01\x01\x12\x1f\n\x08\x64isabled\x18\x08 \x01(\x08H\x06R\x08\x64isabled\x88\x01\x01\x12:\n\x17keep_branch_after_merge\x18\t \x01(\x08H\x07R\x14keepBranchAfterMerge\x88\x01\x01\x12\x16\n\x06labels\x18\n \x03(\tR\x06labels\x12\"\n\nmerge_once\x18\x0b \x01(\x08H\x08R\tmergeOnce\x88\x01\x01\x12\x1c\n\x07pr_body\x18\x0c \x01(\tH\tR\x06prBody\x88\x01\x01\x12\x1e\n\x08pr_title\x18\r \x01(\tH\nR\x07prTitle\x88\x01\x01\x12\x33\n\x07\x66ilters\x18\x0e \x01(\x0b\x32\x14.protocol.v1.FiltersH\x0bR\x07\x66ilters\x88\x01\x01\x12-\n\x07\x61\x63tions\x18\x0f \x03(\x0b\x32\x13.protocol.v1.ActionR\x07\x61\x63tionsB\r\n\x0b_auto_mergeB\x1b\n\x19_auto_merge_after_secondsB\x0e\n\x0c_branch_nameB\x0f\n\r_change_limitB\x11\n\x0f_commit_messageB\x0e\n\x0c_create_onlyB\x0b\n\t_disabledB\x1a\n\x18_keep_branch_after_mergeB\r\n\x0b_merge_onceB\n\n\x08_pr_bodyB\x0b\n\t_pr_titleB\n\n\x08_filters2\x8b\x04\n\x0bTaskService\x12[\n\x0e\x45xecuteActions\x12\".protocol.v1.ExecuteActionsRequest\x1a#.protocol.v1.ExecuteActionsResponse\"\x00\x12[\n\x0e\x45xecuteFilters\x12\".protocol.v1.ExecuteFiltersRequest\x1a#.protocol.v1.ExecuteFiltersResponse\"\x00\x12L\n\tListTasks\x12\x1d.protocol.v1.ListTasksRequest\x1a\x1e.protocol.v1.ListTasksResponse\"\x00\x12O\n\nOnPrClosed\x12\x1e.protocol.v1.OnPrClosedRequest\x1a\x1f.protocol.v1.OnPrClosedResponse\"\x00\x12R\n\x0bOnPrCreated\x12\x1f.protocol.v1.OnPrCreatedRequest\x1a .protocol.v1.OnPrCreatedResponse\"\x00\x12O\n\nOnPrMerged\x12\x1e.protocol.v1.OnPrMergedRequest\x1a\x1f.protocol.v1.OnPrMergedResponse\"\x00\x42o\n\x0f\x63om.protocol.v1B\x0fSaturnsyncProtoP\x01\xa2\x02\x03PXX\xaa\x02\x0bProtocol.V1\xca\x02\x0bProtocol\\V1\xe2\x02\x17Protocol\\V1\\GPBMetadata\xea\x02\x0cProtocol::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n(saturn_sync/protocol/v1/saturnsync.proto\x12\x0bprotocol.v1\"x\n\x15\x45xecuteActionsRequest\x12\x1b\n\ttask_name\x18\x01 \x01(\tR\x08taskName\x12\x12\n\x04path\x18\x02 \x01(\tR\x04path\x12.\n\x07\x63ontext\x18\x03 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"=\n\x16\x45xecuteActionsResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"d\n\x15\x45xecuteFiltersRequest\x12\x1b\n\ttask_name\x18\x01 \x01(\tR\x08taskName\x12.\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"S\n\x16\x45xecuteFiltersResponse\x12\x14\n\x05match\x18\x01 \x01(\x08R\x05match\x12\x19\n\x05\x65rror\x18\x02 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"7\n\x10ListTasksRequest\x12#\n\rcustom_config\x18\x01 \x01(\x0cR\x0c\x63ustomConfig\"a\n\x11ListTasksResponse\x12\'\n\x05tasks\x18\x01 \x03(\x0b\x32\x11.protocol.v1.TaskR\x05tasks\x12\x19\n\x05\x65rror\x18\x02 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"w\n\x07\x41\x63tions\x12+\n\x04\x66ile\x18\x01 \x03(\x0b\x32\x17.protocol.v1.ActionFileR\x04\x66ile\x12?\n\x0cline_in_file\x18\x02 \x03(\x0b\x32\x1d.protocol.v1.ActionLineInFileR\nlineInFile\"\xb4\x01\n\nActionFile\x12\x1d\n\x07\x63ontent\x18\x01 \x01(\tH\x00R\x07\x63ontent\x88\x01\x01\x12\x17\n\x04mode\x18\x02 \x01(\tH\x01R\x04mode\x88\x01\x01\x12\x12\n\x04path\x18\x03 \x01(\tR\x04path\x12\x14\n\x05state\x18\x04 \x01(\tR\x05state\x12!\n\toverwrite\x18\x05 \x01(\x08H\x02R\toverwrite\x88\x01\x01\x42\n\n\x08_contentB\x07\n\x05_modeB\x0c\n\n_overwrite\"\xb3\x01\n\x10\x41\x63tionLineInFile\x12\x17\n\x04line\x18\x01 \x01(\tH\x00R\x04line\x88\x01\x01\x12\x12\n\x04path\x18\x02 \x01(\tR\x04path\x12\x19\n\x05regex\x18\x03 \x01(\tH\x01R\x05regex\x88\x01\x01\x12\x14\n\x05state\x18\x04 \x01(\tR\x05state\x12 \n\tinsert_at\x18\x05 \x01(\tH\x02R\x08insertAt\x88\x01\x01\x42\x07\n\x05_lineB\x08\n\x06_regexB\x0c\n\n_insert_at\"B\n\x07\x43ontext\x12\x37\n\nrepository\x18\x01 \x01(\x0b\x32\x17.protocol.v1.RepositoryR\nrepository\"\x8c\x01\n\nRepository\x12\x1b\n\tfull_name\x18\x01 \x01(\tR\x08\x66ullName\x12$\n\x0e\x63lone_url_http\x18\x02 \x01(\tR\x0c\x63loneUrlHttp\x12\"\n\rclone_url_ssh\x18\x03 \x01(\tR\x0b\x63loneUrlSsh\x12\x17\n\x07web_url\x18\x04 \x01(\tR\x06webUrl\"\xcb\x01\n\x07\x46ilters\x12L\n\x10repository_names\x18\x01 \x03(\x0b\x32!.protocol.v1.FilterRepositoryNameR\x0frepositoryNames\x12-\n\x05\x66iles\x18\x02 \x03(\x0b\x32\x17.protocol.v1.FilterFileR\x05\x66iles\x12\x43\n\rfile_contents\x18\x03 \x03(\x0b\x32\x1e.protocol.v1.FilterFileContentR\x0c\x66ileContents\"j\n\x11\x46ilterFileContent\x12\x12\n\x04path\x18\x01 \x01(\tR\x04path\x12\x16\n\x06search\x18\x02 \x01(\tR\x06search\x12\x1d\n\x07reverse\x18\x03 \x01(\x08H\x00R\x07reverse\x88\x01\x01\x42\n\n\x08_reverse\"K\n\nFilterFile\x12\x12\n\x04path\x18\x01 \x01(\tR\x04path\x12\x1d\n\x07reverse\x18\x02 \x01(\x08H\x00R\x07reverse\x88\x01\x01\x42\n\n\x08_reverse\"W\n\x14\x46ilterRepositoryName\x12\x14\n\x05names\x18\x01 \x03(\tR\x05names\x12\x1d\n\x07reverse\x18\x02 \x01(\x08H\x00R\x07reverse\x88\x01\x01\x42\n\n\x08_reverse\"`\n\x11OnPrClosedRequest\x12\x1b\n\ttask_name\x18\x01 \x01(\tR\x08taskName\x12.\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"9\n\x12OnPrClosedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"a\n\x12OnPrCreatedRequest\x12\x1b\n\ttask_name\x18\x01 \x01(\tR\x08taskName\x12.\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\":\n\x13OnPrCreatedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"`\n\x11OnPrMergedRequest\x12\x1b\n\ttask_name\x18\x01 \x01(\tR\x08taskName\x12.\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"9\n\x12OnPrMergedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"\xb6\x06\n\x04Task\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12\"\n\nauto_merge\x18\x02 \x01(\x08H\x00R\tautoMerge\x88\x01\x01\x12<\n\x18\x61uto_merge_after_seconds\x18\x03 \x01(\x05H\x01R\x15\x61utoMergeAfterSeconds\x88\x01\x01\x12$\n\x0b\x62ranch_name\x18\x04 \x01(\tH\x02R\nbranchName\x88\x01\x01\x12&\n\x0c\x63hange_limit\x18\x05 \x01(\x05H\x03R\x0b\x63hangeLimit\x88\x01\x01\x12*\n\x0e\x63ommit_message\x18\x06 \x01(\tH\x04R\rcommitMessage\x88\x01\x01\x12$\n\x0b\x63reate_only\x18\x07 \x01(\x08H\x05R\ncreateOnly\x88\x01\x01\x12\x1f\n\x08\x64isabled\x18\x08 \x01(\x08H\x06R\x08\x64isabled\x88\x01\x01\x12:\n\x17keep_branch_after_merge\x18\t \x01(\x08H\x07R\x14keepBranchAfterMerge\x88\x01\x01\x12\x16\n\x06labels\x18\n \x03(\tR\x06labels\x12\"\n\nmerge_once\x18\x0b \x01(\x08H\x08R\tmergeOnce\x88\x01\x01\x12\x1c\n\x07pr_body\x18\x0c \x01(\tH\tR\x06prBody\x88\x01\x01\x12\x1e\n\x08pr_title\x18\r \x01(\tH\nR\x07prTitle\x88\x01\x01\x12\x33\n\x07\x66ilters\x18\x0e \x01(\x0b\x32\x14.protocol.v1.FiltersH\x0bR\x07\x66ilters\x88\x01\x01\x12\x33\n\x07\x61\x63tions\x18\x0f \x01(\x0b\x32\x14.protocol.v1.ActionsH\x0cR\x07\x61\x63tions\x88\x01\x01\x42\r\n\x0b_auto_mergeB\x1b\n\x19_auto_merge_after_secondsB\x0e\n\x0c_branch_nameB\x0f\n\r_change_limitB\x11\n\x0f_commit_messageB\x0e\n\x0c_create_onlyB\x0b\n\t_disabledB\x1a\n\x18_keep_branch_after_mergeB\r\n\x0b_merge_onceB\n\n\x08_pr_bodyB\x0b\n\t_pr_titleB\n\n\x08_filtersB\n\n\x08_actions2\x8b\x04\n\x0bTaskService\x12[\n\x0e\x45xecuteActions\x12\".protocol.v1.ExecuteActionsRequest\x1a#.protocol.v1.ExecuteActionsResponse\"\x00\x12[\n\x0e\x45xecuteFilters\x12\".protocol.v1.ExecuteFiltersRequest\x1a#.protocol.v1.ExecuteFiltersResponse\"\x00\x12L\n\tListTasks\x12\x1d.protocol.v1.ListTasksRequest\x1a\x1e.protocol.v1.ListTasksResponse\"\x00\x12O\n\nOnPrClosed\x12\x1e.protocol.v1.OnPrClosedRequest\x1a\x1f.protocol.v1.OnPrClosedResponse\"\x00\x12R\n\x0bOnPrCreated\x12\x1f.protocol.v1.OnPrCreatedRequest\x1a .protocol.v1.OnPrCreatedResponse\"\x00\x12O\n\nOnPrMerged\x12\x1e.protocol.v1.OnPrMergedRequest\x1a\x1f.protocol.v1.OnPrMergedResponse\"\x00\x42o\n\x0f\x63om.protocol.v1B\x0fSaturnsyncProtoP\x01\xa2\x02\x03PXX\xaa\x02\x0bProtocol.V1\xca\x02\x0bProtocol\\V1\xe2\x02\x17Protocol\\V1\\GPBMetadata\xea\x02\x0cProtocol::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -38,36 +38,38 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_LISTTASKSREQUEST']._serialized_end=484
   _globals['_LISTTASKSRESPONSE']._serialized_start=486
   _globals['_LISTTASKSRESPONSE']._serialized_end=583
-  _globals['_ACTION']._serialized_start=585
-  _globals['_ACTION']._serialized_end=652
-  _globals['_ACTIONFILE']._serialized_start=654
-  _globals['_ACTIONFILE']._serialized_end=768
-  _globals['_CONTEXT']._serialized_start=770
-  _globals['_CONTEXT']._serialized_end=836
-  _globals['_REPOSITORY']._serialized_start=839
-  _globals['_REPOSITORY']._serialized_end=979
-  _globals['_FILTERS']._serialized_start=982
-  _globals['_FILTERS']._serialized_end=1185
-  _globals['_FILTERFILECONTENT']._serialized_start=1187
-  _globals['_FILTERFILECONTENT']._serialized_end=1293
-  _globals['_FILTERFILE']._serialized_start=1295
-  _globals['_FILTERFILE']._serialized_end=1370
-  _globals['_FILTERREPOSITORYNAME']._serialized_start=1372
-  _globals['_FILTERREPOSITORYNAME']._serialized_end=1459
-  _globals['_ONPRCLOSEDREQUEST']._serialized_start=1461
-  _globals['_ONPRCLOSEDREQUEST']._serialized_end=1557
-  _globals['_ONPRCLOSEDRESPONSE']._serialized_start=1559
-  _globals['_ONPRCLOSEDRESPONSE']._serialized_end=1616
-  _globals['_ONPRCREATEDREQUEST']._serialized_start=1618
-  _globals['_ONPRCREATEDREQUEST']._serialized_end=1715
-  _globals['_ONPRCREATEDRESPONSE']._serialized_start=1717
-  _globals['_ONPRCREATEDRESPONSE']._serialized_end=1775
-  _globals['_ONPRMERGEDREQUEST']._serialized_start=1777
-  _globals['_ONPRMERGEDREQUEST']._serialized_end=1873
-  _globals['_ONPRMERGEDRESPONSE']._serialized_start=1875
-  _globals['_ONPRMERGEDRESPONSE']._serialized_end=1932
-  _globals['_TASK']._serialized_start=1935
-  _globals['_TASK']._serialized_end=2739
-  _globals['_TASKSERVICE']._serialized_start=2742
-  _globals['_TASKSERVICE']._serialized_end=3265
+  _globals['_ACTIONS']._serialized_start=585
+  _globals['_ACTIONS']._serialized_end=704
+  _globals['_ACTIONFILE']._serialized_start=707
+  _globals['_ACTIONFILE']._serialized_end=887
+  _globals['_ACTIONLINEINFILE']._serialized_start=890
+  _globals['_ACTIONLINEINFILE']._serialized_end=1069
+  _globals['_CONTEXT']._serialized_start=1071
+  _globals['_CONTEXT']._serialized_end=1137
+  _globals['_REPOSITORY']._serialized_start=1140
+  _globals['_REPOSITORY']._serialized_end=1280
+  _globals['_FILTERS']._serialized_start=1283
+  _globals['_FILTERS']._serialized_end=1486
+  _globals['_FILTERFILECONTENT']._serialized_start=1488
+  _globals['_FILTERFILECONTENT']._serialized_end=1594
+  _globals['_FILTERFILE']._serialized_start=1596
+  _globals['_FILTERFILE']._serialized_end=1671
+  _globals['_FILTERREPOSITORYNAME']._serialized_start=1673
+  _globals['_FILTERREPOSITORYNAME']._serialized_end=1760
+  _globals['_ONPRCLOSEDREQUEST']._serialized_start=1762
+  _globals['_ONPRCLOSEDREQUEST']._serialized_end=1858
+  _globals['_ONPRCLOSEDRESPONSE']._serialized_start=1860
+  _globals['_ONPRCLOSEDRESPONSE']._serialized_end=1917
+  _globals['_ONPRCREATEDREQUEST']._serialized_start=1919
+  _globals['_ONPRCREATEDREQUEST']._serialized_end=2016
+  _globals['_ONPRCREATEDRESPONSE']._serialized_start=2018
+  _globals['_ONPRCREATEDRESPONSE']._serialized_end=2076
+  _globals['_ONPRMERGEDREQUEST']._serialized_start=2078
+  _globals['_ONPRMERGEDREQUEST']._serialized_end=2174
+  _globals['_ONPRMERGEDRESPONSE']._serialized_start=2176
+  _globals['_ONPRMERGEDRESPONSE']._serialized_end=2233
+  _globals['_TASK']._serialized_start=2236
+  _globals['_TASK']._serialized_end=3058
+  _globals['_TASKSERVICE']._serialized_start=3061
+  _globals['_TASKSERVICE']._serialized_end=3584
 # @@protoc_insertion_point(module_scope)

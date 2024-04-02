@@ -220,6 +220,7 @@ def _find_open_port() -> int:
 def _to_proto_task(task: Task) -> saturnsync_pb2.Task:
     return saturnsync_pb2.Task(
         name=task.name,
+        actions=task.actions,
         auto_merge=task.auto_merge,
         auto_merge_after_seconds=task.auto_merge_after_seconds,
         branch_name=task.branch_name,

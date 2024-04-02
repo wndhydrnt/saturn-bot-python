@@ -3,6 +3,9 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 from saturn_sync.protocol.v1.saturnsync_pb2 import (
+    ActionFile,
+    ActionLineInFile,
+    Actions,
     Context,
     FilterFile,
     FilterFileContent,
@@ -13,6 +16,9 @@ from saturn_sync.sdk import serve_tasks
 from saturn_sync.task import Task
 
 __all__ = [
+    "ActionFile",
+    "ActionLineInFile",
+    "Actions",
     "Context",
     "FilterFile",
     "FilterFileContent",

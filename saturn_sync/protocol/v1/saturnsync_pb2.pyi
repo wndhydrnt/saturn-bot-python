@@ -55,23 +55,41 @@ class ListTasksResponse(_message.Message):
     error: str
     def __init__(self, tasks: _Optional[_Iterable[_Union[Task, _Mapping]]] = ..., error: _Optional[str] = ...) -> None: ...
 
-class Action(_message.Message):
-    __slots__ = ("file",)
+class Actions(_message.Message):
+    __slots__ = ("file", "line_in_file")
     FILE_FIELD_NUMBER: _ClassVar[int]
-    file: ActionFile
-    def __init__(self, file: _Optional[_Union[ActionFile, _Mapping]] = ...) -> None: ...
+    LINE_IN_FILE_FIELD_NUMBER: _ClassVar[int]
+    file: _containers.RepeatedCompositeFieldContainer[ActionFile]
+    line_in_file: _containers.RepeatedCompositeFieldContainer[ActionLineInFile]
+    def __init__(self, file: _Optional[_Iterable[_Union[ActionFile, _Mapping]]] = ..., line_in_file: _Optional[_Iterable[_Union[ActionLineInFile, _Mapping]]] = ...) -> None: ...
 
 class ActionFile(_message.Message):
-    __slots__ = ("content", "mode", "path", "state")
+    __slots__ = ("content", "mode", "path", "state", "overwrite")
     CONTENT_FIELD_NUMBER: _ClassVar[int]
     MODE_FIELD_NUMBER: _ClassVar[int]
     PATH_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
+    OVERWRITE_FIELD_NUMBER: _ClassVar[int]
     content: str
     mode: str
     path: str
     state: str
-    def __init__(self, content: _Optional[str] = ..., mode: _Optional[str] = ..., path: _Optional[str] = ..., state: _Optional[str] = ...) -> None: ...
+    overwrite: bool
+    def __init__(self, content: _Optional[str] = ..., mode: _Optional[str] = ..., path: _Optional[str] = ..., state: _Optional[str] = ..., overwrite: bool = ...) -> None: ...
+
+class ActionLineInFile(_message.Message):
+    __slots__ = ("line", "path", "regex", "state", "insert_at")
+    LINE_FIELD_NUMBER: _ClassVar[int]
+    PATH_FIELD_NUMBER: _ClassVar[int]
+    REGEX_FIELD_NUMBER: _ClassVar[int]
+    STATE_FIELD_NUMBER: _ClassVar[int]
+    INSERT_AT_FIELD_NUMBER: _ClassVar[int]
+    line: str
+    path: str
+    regex: str
+    state: str
+    insert_at: str
+    def __init__(self, line: _Optional[str] = ..., path: _Optional[str] = ..., regex: _Optional[str] = ..., state: _Optional[str] = ..., insert_at: _Optional[str] = ...) -> None: ...
 
 class Context(_message.Message):
     __slots__ = ("repository",)
@@ -200,5 +218,5 @@ class Task(_message.Message):
     pr_body: str
     pr_title: str
     filters: Filters
-    actions: _containers.RepeatedCompositeFieldContainer[Action]
-    def __init__(self, name: _Optional[str] = ..., auto_merge: bool = ..., auto_merge_after_seconds: _Optional[int] = ..., branch_name: _Optional[str] = ..., change_limit: _Optional[int] = ..., commit_message: _Optional[str] = ..., create_only: bool = ..., disabled: bool = ..., keep_branch_after_merge: bool = ..., labels: _Optional[_Iterable[str]] = ..., merge_once: bool = ..., pr_body: _Optional[str] = ..., pr_title: _Optional[str] = ..., filters: _Optional[_Union[Filters, _Mapping]] = ..., actions: _Optional[_Iterable[_Union[Action, _Mapping]]] = ...) -> None: ...
+    actions: Actions
+    def __init__(self, name: _Optional[str] = ..., auto_merge: bool = ..., auto_merge_after_seconds: _Optional[int] = ..., branch_name: _Optional[str] = ..., change_limit: _Optional[int] = ..., commit_message: _Optional[str] = ..., create_only: bool = ..., disabled: bool = ..., keep_branch_after_merge: bool = ..., labels: _Optional[_Iterable[str]] = ..., merge_once: bool = ..., pr_body: _Optional[str] = ..., pr_title: _Optional[str] = ..., filters: _Optional[_Union[Filters, _Mapping]] = ..., actions: _Optional[_Union[Actions, _Mapping]] = ...) -> None: ...

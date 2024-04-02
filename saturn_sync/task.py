@@ -4,11 +4,12 @@
 
 from typing import Mapping, Optional
 
-from saturn_sync.protocol.v1.saturnsync_pb2 import Context, Filters
+from saturn_sync.protocol.v1.saturnsync_pb2 import Actions, Context, Filters
 
 
 class Task:
     name: str
+    actions: Optional[Actions] = None
     auto_merge: bool = False
     auto_merge_after_seconds: int = 0
     branch_name: str = ""
