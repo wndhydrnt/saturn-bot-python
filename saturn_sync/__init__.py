@@ -3,7 +3,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 from saturn_sync.protocol.v1.saturnsync_pb2 import Context
-from saturn_sync.sdk import serve_plugin, Plugin
+from saturn_sync.sdk import Plugin, serve_plugin
 
 __all__ = [
     "Context",
