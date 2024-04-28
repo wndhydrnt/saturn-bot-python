@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/wndhydrnt/saturn-bot-python/compare/v0.2.0...v0.3.0) (2024-04-28)
+
+
+### Features
+
+* rename project from "saturn-sync-python" to "saturn-bot-python" ([b08bff7](https://github.com/wndhydrnt/saturn-bot-python/commit/b08bff7e345111cc304f99f0311a704aee026afa))
+
 ## [0.2.0](https://github.com/wndhydrnt/saturn-bot-python/compare/v0.1.0...v0.2.0) (2024-04-25)
 
 
