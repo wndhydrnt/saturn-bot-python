@@ -16,9 +16,9 @@ import grpc
 from grpc_health.v1 import health_pb2, health_pb2_grpc
 from grpc_health.v1.health import HealthServicer
 
-from saturn_sync import Context
-from saturn_sync.plugin import grpc_controller_pb2_grpc
-from saturn_sync.protocol.v1 import saturnsync_pb2, saturnsync_pb2_grpc
+from saturn_bot import Context
+from saturn_bot.plugin import grpc_controller_pb2_grpc
+from saturn_bot.protocol.v1 import saturnbot_pb2, saturnbot_pb2_grpc
 
 BIND_IP: str = "127.0.0.1"
 
@@ -56,78 +56,78 @@ def in_checkout_dir(d: str) -> Iterator[None]:
         os.chdir(current)
 
 
-class PluginService(saturnsync_pb2_grpc.PluginServiceServicer):
+class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
     def __init__(self, p: Plugin):
         self._plugin = p
 
     def ExecuteActions(
-        self, request: saturnsync_pb2.ExecuteActionsRequest, context
-    ) -> saturnsync_pb2.ExecuteActionsResponse:
+        self, request: saturnbot_pb2.ExecuteActionsRequest, context
+    ) -> saturnbot_pb2.ExecuteActionsResponse:
         try:
             with in_checkout_dir(request.path):
                 self._plugin.apply(ctx=request.context)
         except Exception as e:
-            return saturnsync_pb2.ExecuteActionsResponse(
+            return saturnbot_pb2.ExecuteActionsResponse(
                 error=f"failed to execute actions: {e}"
             )
 
-        return saturnsync_pb2.ExecuteActionsResponse(error=None)
+        return saturnbot_pb2.ExecuteActionsResponse(error=None)
 
     def ExecuteFilters(
-        self, request: saturnsync_pb2.ExecuteFiltersRequest, context
-    ) -> saturnsync_pb2.ExecuteFiltersResponse:
+        self, request: saturnbot_pb2.ExecuteFiltersRequest, context
+    ) -> saturnbot_pb2.ExecuteFiltersResponse:
         try:
             result = self._plugin.filter(ctx=request.context)
-            return saturnsync_pb2.ExecuteFiltersResponse(match=result, error=None)
+            return saturnbot_pb2.ExecuteFiltersResponse(match=result, error=None)
         except Exception as e:
-            return saturnsync_pb2.ExecuteFiltersResponse(
+            return saturnbot_pb2.ExecuteFiltersResponse(
                 match=False,
                 error=f"failed to execute filters: {e}",
             )
 
     def GetPlugin(
-        self, request: saturnsync_pb2.GetPluginRequest, context
-    ) -> saturnsync_pb2.GetPluginResponse:
+        self, request: saturnbot_pb2.GetPluginRequest, context
+    ) -> saturnbot_pb2.GetPluginResponse:
         try:
             self._plugin.init(config=request.config)
-            return saturnsync_pb2.GetPluginResponse(
+            return saturnbot_pb2.GetPluginResponse(
                 name=self._plugin.name, priority=self._plugin.priority, error=None
             )
         except Exception as e:
-            return saturnsync_pb2.GetPluginResponse(
+            return saturnbot_pb2.GetPluginResponse(
                 error=f"plugin '{self._plugin.name}' failed during initialization: {e}"
             )
 
     def OnPrClosed(
-        self, request: saturnsync_pb2.OnPrClosedRequest, context
-    ) -> saturnsync_pb2.OnPrClosedResponse:
+        self, request: saturnbot_pb2.OnPrClosedRequest, context
+    ) -> saturnbot_pb2.OnPrClosedResponse:
         try:
             self._plugin.on_pr_closed(request.context)
-            return saturnsync_pb2.OnPrClosedResponse(error=None)
+            return saturnbot_pb2.OnPrClosedResponse(error=None)
         except Exception as e:
-            return saturnsync_pb2.OnPrClosedResponse(
+            return saturnbot_pb2.OnPrClosedResponse(
                 error=f"failed to execute OnPrClosed event: {e}"
             )
 
     def OnPrCreated(
-        self, request: saturnsync_pb2.OnPrCreatedRequest, context
-    ) -> saturnsync_pb2.OnPrCreatedResponse:
+        self, request: saturnbot_pb2.OnPrCreatedRequest, context
+    ) -> saturnbot_pb2.OnPrCreatedResponse:
         try:
             self._plugin.on_pr_created(request.context)
-            return saturnsync_pb2.OnPrCreatedResponse(error=None)
+            return saturnbot_pb2.OnPrCreatedResponse(error=None)
         except Exception as e:
-            return saturnsync_pb2.OnPrCreatedResponse(
+            return saturnbot_pb2.OnPrCreatedResponse(
                 error=f"failed to execute OnPrCreated event: {e}"
             )
 
     def OnPrMerged(
-        self, request: saturnsync_pb2.OnPrMergedRequest, context
-    ) -> saturnsync_pb2.OnPrMergedResponse:
+        self, request: saturnbot_pb2.OnPrMergedRequest, context
+    ) -> saturnbot_pb2.OnPrMergedResponse:
         try:
             self._plugin.on_pr_merged(request.context)
-            return saturnsync_pb2.OnPrMergedResponse(error=None)
+            return saturnbot_pb2.OnPrMergedResponse(error=None)
         except Exception as e:
-            return saturnsync_pb2.OnPrMergedResponse(
+            return saturnbot_pb2.OnPrMergedResponse(
                 error=f"failed to execute OnPrMerged event: {e}"
             )
 
@@ -144,7 +144,7 @@ def serve(port: int, shutdown: GRPCController, plugin: Plugin):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     server.add_insecure_port(f"{BIND_IP}:{port}")
 
-    saturnsync_pb2_grpc.add_PluginServiceServicer_to_server(
+    saturnbot_pb2_grpc.add_PluginServiceServicer_to_server(
         servicer=PluginService(plugin), server=server
     )
 

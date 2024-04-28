@@ -6,7 +6,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from saturn_sync.protocol.v1 import saturnsync_pb2 as saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2
+from saturn_bot.protocol.v1 import saturnbot_pb2 as saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2
 
 
 class PluginServiceStub(object):
@@ -20,33 +20,33 @@ class PluginServiceStub(object):
         """
         self.ExecuteActions = channel.unary_unary(
                 '/protocol.v1.PluginService/ExecuteActions',
-                request_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteActionsRequest.SerializeToString,
-                response_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteActionsResponse.FromString,
+                request_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteActionsRequest.SerializeToString,
+                response_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteActionsResponse.FromString,
                 )
         self.ExecuteFilters = channel.unary_unary(
                 '/protocol.v1.PluginService/ExecuteFilters',
-                request_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteFiltersRequest.SerializeToString,
-                response_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteFiltersResponse.FromString,
+                request_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteFiltersRequest.SerializeToString,
+                response_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteFiltersResponse.FromString,
                 )
         self.GetPlugin = channel.unary_unary(
                 '/protocol.v1.PluginService/GetPlugin',
-                request_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.GetPluginRequest.SerializeToString,
-                response_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.GetPluginResponse.FromString,
+                request_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.GetPluginRequest.SerializeToString,
+                response_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.GetPluginResponse.FromString,
                 )
         self.OnPrClosed = channel.unary_unary(
                 '/protocol.v1.PluginService/OnPrClosed',
-                request_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrClosedRequest.SerializeToString,
-                response_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrClosedResponse.FromString,
+                request_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrClosedRequest.SerializeToString,
+                response_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrClosedResponse.FromString,
                 )
         self.OnPrCreated = channel.unary_unary(
                 '/protocol.v1.PluginService/OnPrCreated',
-                request_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrCreatedRequest.SerializeToString,
-                response_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrCreatedResponse.FromString,
+                request_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrCreatedRequest.SerializeToString,
+                response_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrCreatedResponse.FromString,
                 )
         self.OnPrMerged = channel.unary_unary(
                 '/protocol.v1.PluginService/OnPrMerged',
-                request_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrMergedRequest.SerializeToString,
-                response_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrMergedResponse.FromString,
+                request_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedRequest.SerializeToString,
+                response_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedResponse.FromString,
                 )
 
 
@@ -94,33 +94,33 @@ def add_PluginServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ExecuteActions': grpc.unary_unary_rpc_method_handler(
                     servicer.ExecuteActions,
-                    request_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteActionsRequest.FromString,
-                    response_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteActionsResponse.SerializeToString,
+                    request_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteActionsRequest.FromString,
+                    response_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteActionsResponse.SerializeToString,
             ),
             'ExecuteFilters': grpc.unary_unary_rpc_method_handler(
                     servicer.ExecuteFilters,
-                    request_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteFiltersRequest.FromString,
-                    response_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteFiltersResponse.SerializeToString,
+                    request_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteFiltersRequest.FromString,
+                    response_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteFiltersResponse.SerializeToString,
             ),
             'GetPlugin': grpc.unary_unary_rpc_method_handler(
                     servicer.GetPlugin,
-                    request_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.GetPluginRequest.FromString,
-                    response_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.GetPluginResponse.SerializeToString,
+                    request_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.GetPluginRequest.FromString,
+                    response_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.GetPluginResponse.SerializeToString,
             ),
             'OnPrClosed': grpc.unary_unary_rpc_method_handler(
                     servicer.OnPrClosed,
-                    request_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrClosedRequest.FromString,
-                    response_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrClosedResponse.SerializeToString,
+                    request_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrClosedRequest.FromString,
+                    response_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrClosedResponse.SerializeToString,
             ),
             'OnPrCreated': grpc.unary_unary_rpc_method_handler(
                     servicer.OnPrCreated,
-                    request_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrCreatedRequest.FromString,
-                    response_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrCreatedResponse.SerializeToString,
+                    request_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrCreatedRequest.FromString,
+                    response_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrCreatedResponse.SerializeToString,
             ),
             'OnPrMerged': grpc.unary_unary_rpc_method_handler(
                     servicer.OnPrMerged,
-                    request_deserializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrMergedRequest.FromString,
-                    response_serializer=saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrMergedResponse.SerializeToString,
+                    request_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedRequest.FromString,
+                    response_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -144,8 +144,8 @@ class PluginService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protocol.v1.PluginService/ExecuteActions',
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteActionsRequest.SerializeToString,
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteActionsResponse.FromString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteActionsRequest.SerializeToString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteActionsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -161,8 +161,8 @@ class PluginService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protocol.v1.PluginService/ExecuteFilters',
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteFiltersRequest.SerializeToString,
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.ExecuteFiltersResponse.FromString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteFiltersRequest.SerializeToString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ExecuteFiltersResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -178,8 +178,8 @@ class PluginService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protocol.v1.PluginService/GetPlugin',
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.GetPluginRequest.SerializeToString,
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.GetPluginResponse.FromString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.GetPluginRequest.SerializeToString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.GetPluginResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -195,8 +195,8 @@ class PluginService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protocol.v1.PluginService/OnPrClosed',
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrClosedRequest.SerializeToString,
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrClosedResponse.FromString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrClosedRequest.SerializeToString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrClosedResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -212,8 +212,8 @@ class PluginService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protocol.v1.PluginService/OnPrCreated',
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrCreatedRequest.SerializeToString,
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrCreatedResponse.FromString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrCreatedRequest.SerializeToString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrCreatedResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -229,7 +229,7 @@ class PluginService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protocol.v1.PluginService/OnPrMerged',
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrMergedRequest.SerializeToString,
-            saturn__sync_dot_protocol_dot_v1_dot_saturnsync__pb2.OnPrMergedResponse.FromString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedRequest.SerializeToString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

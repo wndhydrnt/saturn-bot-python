@@ -4,14 +4,14 @@ omit = [ ".venv/*", "tests/*", "**/*pb2*"]
 source = [ ".",]
 
 [tool.black]
-extend_exclude = "saturn_sync/plugin|saturn_sync/protocol"
+extend_exclude = "saturn_bot/plugin|saturn_bot/protocol"
 line-length = 88
 
 [tool.isort]
 profile = "black"
 multi_line_output = 3
 # The following files are auto-generated. Do not check them.
-skip_glob = ["saturn_sync/plugin/*", "saturn_sync/protocol/*"]
+skip_glob = ["saturn_bot/plugin/*", "saturn_bot/protocol/*"]
 
 # No types are available
 # https://github.com/grpc/grpc/issues/29041
@@ -24,19 +24,19 @@ module = "grpc_health.*"
 ignore_missing_imports = true
 
 [tool.poetry]
-name = "saturn-sync"
+name = "saturn-bot"
 version = "0.2.0"
 description = "Synchronize and refactor repositories with ease."
 authors = ["Markus Meyer <hydrantanderwand@gmail.com>"]
 license = "MPL-2.0"
 readme = "README.md"
-repository = "https://github.com/wndhydrnt/saturn-sync-protocol"
+repository = "https://github.com/wndhydrnt/saturn-bot-protocol"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
 ]
 packages = [
-  { include = "saturn_sync" }
+  { include = "saturn_bot" }
 ]
 
 [tool.poetry.dependencies]

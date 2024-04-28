@@ -6,7 +6,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from saturn_sync.plugin import grpc_controller_pb2 as saturn__sync_dot_plugin_dot_grpc__controller__pb2
+from saturn_bot.plugin import grpc_controller_pb2 as saturn__bot_dot_plugin_dot_grpc__controller__pb2
 
 
 class GRPCControllerStub(object):
@@ -21,8 +21,8 @@ class GRPCControllerStub(object):
         """
         self.Shutdown = channel.unary_unary(
                 '/plugin.GRPCController/Shutdown',
-                request_serializer=saturn__sync_dot_plugin_dot_grpc__controller__pb2.Empty.SerializeToString,
-                response_deserializer=saturn__sync_dot_plugin_dot_grpc__controller__pb2.Empty.FromString,
+                request_serializer=saturn__bot_dot_plugin_dot_grpc__controller__pb2.Empty.SerializeToString,
+                response_deserializer=saturn__bot_dot_plugin_dot_grpc__controller__pb2.Empty.FromString,
                 )
 
 
@@ -41,8 +41,8 @@ def add_GRPCControllerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Shutdown': grpc.unary_unary_rpc_method_handler(
                     servicer.Shutdown,
-                    request_deserializer=saturn__sync_dot_plugin_dot_grpc__controller__pb2.Empty.FromString,
-                    response_serializer=saturn__sync_dot_plugin_dot_grpc__controller__pb2.Empty.SerializeToString,
+                    request_deserializer=saturn__bot_dot_plugin_dot_grpc__controller__pb2.Empty.FromString,
+                    response_serializer=saturn__bot_dot_plugin_dot_grpc__controller__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -67,7 +67,7 @@ class GRPCController(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/plugin.GRPCController/Shutdown',
-            saturn__sync_dot_plugin_dot_grpc__controller__pb2.Empty.SerializeToString,
-            saturn__sync_dot_plugin_dot_grpc__controller__pb2.Empty.FromString,
+            saturn__bot_dot_plugin_dot_grpc__controller__pb2.Empty.SerializeToString,
+            saturn__bot_dot_plugin_dot_grpc__controller__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

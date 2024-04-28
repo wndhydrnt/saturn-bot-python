@@ -8,10 +8,10 @@ import unittest
 from typing import Mapping
 from unittest.mock import Mock
 
-from saturn_sync import Context, Plugin
-from saturn_sync.plugin.grpc_controller_pb2_grpc import GRPCController
-from saturn_sync.protocol.v1 import saturnsync_pb2
-from saturn_sync.sdk import PluginService, _find_open_port, serve
+from saturn_bot import Context, Plugin
+from saturn_bot.plugin.grpc_controller_pb2_grpc import GRPCController
+from saturn_bot.protocol.v1 import saturnbot_pb2
+from saturn_bot.sdk import PluginService, _find_open_port, serve
 
 
 class UnitTestPlugin(Plugin):
@@ -65,9 +65,9 @@ class UnitTestPlugin(Plugin):
 class TaskServiceTest(unittest.TestCase):
     def test_ExecuteActions(self):
         plugin = UnitTestPlugin()
-        context = saturnsync_pb2.Context()
+        context = saturnbot_pb2.Context()
         with tempfile.TemporaryDirectory() as d:
-            request = saturnsync_pb2.ExecuteActionsRequest(path=d, context=context)
+            request = saturnbot_pb2.ExecuteActionsRequest(path=d, context=context)
 
             service = PluginService(p=plugin)
             response = service.ExecuteActions(request=request, context={})
@@ -80,9 +80,9 @@ class TaskServiceTest(unittest.TestCase):
         plugin = Mock(spec=Plugin)
         plugin.name = "Unit Test"
         plugin.apply.side_effect = RuntimeError("plugin failed")
-        context = saturnsync_pb2.Context()
+        context = saturnbot_pb2.Context()
         with tempfile.TemporaryDirectory() as d:
-            request = saturnsync_pb2.ExecuteActionsRequest(path=d, context=context)
+            request = saturnbot_pb2.ExecuteActionsRequest(path=d, context=context)
 
             service = PluginService(plugin)
             response = service.ExecuteActions(request=request, context={})
@@ -92,8 +92,8 @@ class TaskServiceTest(unittest.TestCase):
 
     def test_ExecuteFilters(self):
         plugin = UnitTestPlugin()
-        context = saturnsync_pb2.Context()
-        request = saturnsync_pb2.ExecuteFiltersRequest(context=context)
+        context = saturnbot_pb2.Context()
+        request = saturnbot_pb2.ExecuteFiltersRequest(context=context)
 
         service = PluginService(plugin)
         response = service.ExecuteFilters(request=request, context={})
@@ -105,8 +105,8 @@ class TaskServiceTest(unittest.TestCase):
         plugin = Mock(spec=Plugin)
         plugin.name = "Unit Test"
         plugin.filter.side_effect = RuntimeError("task failed")
-        context = saturnsync_pb2.Context()
-        request = saturnsync_pb2.ExecuteFiltersRequest(context=context)
+        context = saturnbot_pb2.Context()
+        request = saturnbot_pb2.ExecuteFiltersRequest(context=context)
 
         service = PluginService(plugin)
         response = service.ExecuteFilters(request=request, context={})
@@ -116,7 +116,7 @@ class TaskServiceTest(unittest.TestCase):
 
     def test_GetPlugin(self):
         plugin = UnitTestPlugin()
-        request = saturnsync_pb2.GetPluginRequest(config={"config_key": "config value"})
+        request = saturnbot_pb2.GetPluginRequest(config={"config_key": "config value"})
 
         service = PluginService(plugin)
         response = service.GetPlugin(request=request, context={})
@@ -130,7 +130,7 @@ class TaskServiceTest(unittest.TestCase):
         plugin = Mock(spec=Plugin)
         plugin.name = "Unit Test"
         plugin.init.side_effect = RuntimeError("plugin failed")
-        request = saturnsync_pb2.GetPluginRequest(config={})
+        request = saturnbot_pb2.GetPluginRequest(config={})
 
         service = PluginService(plugin)
         response = service.GetPlugin(request=request, context={})
@@ -142,8 +142,8 @@ class TaskServiceTest(unittest.TestCase):
 
     def test_OnPrClosed(self):
         plugin = UnitTestPlugin()
-        context = saturnsync_pb2.Context()
-        request = saturnsync_pb2.OnPrClosedRequest(context=context)
+        context = saturnbot_pb2.Context()
+        request = saturnbot_pb2.OnPrClosedRequest(context=context)
 
         service = PluginService(plugin)
         response = service.OnPrClosed(request=request, context={})
@@ -153,8 +153,8 @@ class TaskServiceTest(unittest.TestCase):
 
     def test_OnPrClosed__exception(self):
         plugin = UnitTestPlugin(raise_on_pr_closed=True)
-        context = saturnsync_pb2.Context()
-        request = saturnsync_pb2.OnPrClosedRequest(context=context)
+        context = saturnbot_pb2.Context()
+        request = saturnbot_pb2.OnPrClosedRequest(context=context)
 
         service = PluginService(plugin)
         response = service.OnPrClosed(request=request, context={})
@@ -166,8 +166,8 @@ class TaskServiceTest(unittest.TestCase):
 
     def test_OnPrCreated(self):
         plugin = UnitTestPlugin()
-        context = saturnsync_pb2.Context()
-        request = saturnsync_pb2.OnPrCreatedRequest(context=context)
+        context = saturnbot_pb2.Context()
+        request = saturnbot_pb2.OnPrCreatedRequest(context=context)
 
         service = PluginService(plugin)
         response = service.OnPrCreated(request=request, context={})
@@ -177,8 +177,8 @@ class TaskServiceTest(unittest.TestCase):
 
     def test_OnPrCreated__exception(self):
         plugin = UnitTestPlugin(raise_on_pr_created=True)
-        context = saturnsync_pb2.Context()
-        request = saturnsync_pb2.OnPrCreatedRequest(context=context)
+        context = saturnbot_pb2.Context()
+        request = saturnbot_pb2.OnPrCreatedRequest(context=context)
 
         service = PluginService(plugin)
         response = service.OnPrCreated(request=request, context={})
@@ -190,8 +190,8 @@ class TaskServiceTest(unittest.TestCase):
 
     def test_OnPrMerged(self):
         plugin = UnitTestPlugin()
-        context = saturnsync_pb2.Context()
-        request = saturnsync_pb2.OnPrMergedRequest(context=context)
+        context = saturnbot_pb2.Context()
+        request = saturnbot_pb2.OnPrMergedRequest(context=context)
 
         service = PluginService(plugin)
         response = service.OnPrMerged(request=request, context={})
@@ -201,8 +201,8 @@ class TaskServiceTest(unittest.TestCase):
 
     def test_OnPrMerged__exception(self):
         plugin = UnitTestPlugin(raise_on_pr_merged=True)
-        context = saturnsync_pb2.Context()
-        request = saturnsync_pb2.OnPrMergedRequest(context=context)
+        context = saturnbot_pb2.Context()
+        request = saturnbot_pb2.OnPrMergedRequest(context=context)
 
         service = PluginService(plugin)
         response = service.OnPrMerged(request=request, context={})

@@ -1,23 +1,23 @@
-PROTOCOL_VERSION?=v0.7.0
+PROTOCOL_VERSION?=v0.8.0
 
 clean:
-	rm saturn_sync/protocol/v1/saturnsync.proto
-	rm saturn_sync/plugin/grpc_controller.proto
+	rm saturn_bot/protocol/v1/saturnbot.proto
+	rm saturn_bot/plugin/grpc_controller.proto
 
-generate: saturn_sync/protocol/v1/saturnsync.proto saturn_sync/plugin/grpc_controller.proto
+generate: saturn_bot/protocol/v1/saturnbot.proto saturn_bot/plugin/grpc_controller.proto
 	buf generate
-	touch saturn_sync/protocol/__init__.py
-	touch saturn_sync/protocol/v1/__init__.py
-	touch saturn_sync/plugin/__init__.py
+	touch saturn_bot/protocol/__init__.py
+	touch saturn_bot/protocol/v1/__init__.py
+	touch saturn_bot/plugin/__init__.py
 	docker run -it --rm -v ${PWD}:/github/workspace ghcr.io/apache/skywalking-eyes/license-eye header fix
 
-saturn_sync/protocol/v1/saturnsync.proto:
-	mkdir -p ./saturn_sync/protocol/v1/
-	curl -L -o ./saturn_sync/protocol/v1/saturnsync.proto --silent --fail https://raw.githubusercontent.com/wndhydrnt/saturn-sync-protocol/$(PROTOCOL_VERSION)/protocol/v1/saturnsync.proto
+saturn_bot/protocol/v1/saturnbot.proto:
+	mkdir -p ./saturn_bot/protocol/v1/
+	curl -L -o ./saturn_bot/protocol/v1/saturnbot.proto --silent --fail https://raw.githubusercontent.com/wndhydrnt/saturn-bot-protocol/$(PROTOCOL_VERSION)/protocol/v1/saturnbot.proto
 
-saturn_sync/plugin/grpc_controller.proto:
+saturn_bot/plugin/grpc_controller.proto:
 	mkdir -p ./plugin/
-	curl -L -o ./saturn_sync/plugin/grpc_controller.proto --silent --fail https://raw.githubusercontent.com/hashicorp/go-plugin/v1.6.0/internal/plugin/grpc_controller.proto
+	curl -L -o ./saturn_bot/plugin/grpc_controller.proto --silent --fail https://raw.githubusercontent.com/hashicorp/go-plugin/v1.6.0/internal/plugin/grpc_controller.proto
 
 lint:
 	poetry run black --check .
