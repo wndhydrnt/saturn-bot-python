@@ -28,7 +28,7 @@ class Context:
     plugin_data: MutableMapping[str, str]
     pull_request: saturnbot_pb2.PullRequest
     repository: saturnbot_pb2.Repository
-    tpl_data: MutableMapping[str, str]
+    template_vars: MutableMapping[str, str]
 
 
 class Plugin:
@@ -74,7 +74,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         ctx = Context(
             pull_request=request.context.pull_request,
             repository=request.context.repository,
-            tpl_data={},
+            template_vars={},
             plugin_data=request.context.plugin_data,
         )
         try:
@@ -86,7 +86,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
             )
 
         return saturnbot_pb2.ExecuteActionsResponse(
-            error=None, plugin_data=ctx.plugin_data, template_vars=ctx.tpl_data
+            error=None, plugin_data=ctx.plugin_data, template_vars=ctx.template_vars
         )
 
     def ExecuteFilters(
@@ -95,7 +95,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         ctx = Context(
             pull_request=request.context.pull_request,
             repository=request.context.repository,
-            tpl_data={},
+            template_vars={},
             plugin_data=request.context.plugin_data,
         )
         try:
@@ -104,7 +104,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
                 match=result,
                 error=None,
                 plugin_data=ctx.plugin_data,
-                template_vars=ctx.tpl_data,
+                template_vars=ctx.template_vars,
             )
         except Exception as e:
             return saturnbot_pb2.ExecuteFiltersResponse(
@@ -131,7 +131,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         ctx = Context(
             pull_request=request.context.pull_request,
             repository=request.context.repository,
-            tpl_data={},
+            template_vars={},
             plugin_data=request.context.plugin_data,
         )
         try:
@@ -148,7 +148,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         ctx = Context(
             pull_request=request.context.pull_request,
             repository=request.context.repository,
-            tpl_data={},
+            template_vars={},
             plugin_data=request.context.plugin_data,
         )
         try:
@@ -165,7 +165,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         ctx = Context(
             pull_request=request.context.pull_request,
             repository=request.context.repository,
-            tpl_data={},
+            template_vars={},
             plugin_data=request.context.plugin_data,
         )
         try:

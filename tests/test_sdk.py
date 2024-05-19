@@ -34,13 +34,13 @@ class UnitTestPlugin(Plugin):
         self.config_key: str = ""
 
     def apply(self, ctx: Context) -> None:
-        ctx.tpl_data["source"] = "tpl_apply"
+        ctx.template_vars["source"] = "tpl_apply"
         ctx.plugin_data["source"] = "pd_apply"
         with open("test.txt", "w+") as f:
             f.write("unit test")
 
     def filter(self, ctx: Context) -> bool:
-        ctx.tpl_data["source"] = "tpl_filter"
+        ctx.template_vars["source"] = "tpl_filter"
         ctx.plugin_data["source"] = "pd_filter"
         return True
 
