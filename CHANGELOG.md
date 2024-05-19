@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/wndhydrnt/saturn-bot-python/compare/v0.3.0...v0.4.0) (2024-05-19)
+
+
+### Features
+
+* Upgrade protocol to v0.9.0 - support template vars and plugin data ([#5](https://github.com/wndhydrnt/saturn-bot-python/issues/5)) ([841f8a7](https://github.com/wndhydrnt/saturn-bot-python/commit/841f8a7e2343af69953f32e048fa25dd24a3db75))
+
 ## [0.3.0](https://github.com/wndhydrnt/saturn-bot-python/compare/v0.2.0...v0.3.0) (2024-04-28)
 
 
