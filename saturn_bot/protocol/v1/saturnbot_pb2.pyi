@@ -18,10 +18,28 @@ class ExecuteActionsRequest(_message.Message):
     def __init__(self, path: _Optional[str] = ..., context: _Optional[_Union[Context, _Mapping]] = ...) -> None: ...
 
 class ExecuteActionsResponse(_message.Message):
-    __slots__ = ("error",)
+    __slots__ = ("error", "template_vars", "plugin_data")
+    class TemplateVarsEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    class PluginDataEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
     ERROR_FIELD_NUMBER: _ClassVar[int]
+    TEMPLATE_VARS_FIELD_NUMBER: _ClassVar[int]
+    PLUGIN_DATA_FIELD_NUMBER: _ClassVar[int]
     error: str
-    def __init__(self, error: _Optional[str] = ...) -> None: ...
+    template_vars: _containers.ScalarMap[str, str]
+    plugin_data: _containers.ScalarMap[str, str]
+    def __init__(self, error: _Optional[str] = ..., template_vars: _Optional[_Mapping[str, str]] = ..., plugin_data: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class ExecuteFiltersRequest(_message.Message):
     __slots__ = ("context",)
@@ -30,12 +48,30 @@ class ExecuteFiltersRequest(_message.Message):
     def __init__(self, context: _Optional[_Union[Context, _Mapping]] = ...) -> None: ...
 
 class ExecuteFiltersResponse(_message.Message):
-    __slots__ = ("match", "error")
+    __slots__ = ("match", "error", "template_vars", "plugin_data")
+    class TemplateVarsEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+    class PluginDataEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
     MATCH_FIELD_NUMBER: _ClassVar[int]
     ERROR_FIELD_NUMBER: _ClassVar[int]
+    TEMPLATE_VARS_FIELD_NUMBER: _ClassVar[int]
+    PLUGIN_DATA_FIELD_NUMBER: _ClassVar[int]
     match: bool
     error: str
-    def __init__(self, match: bool = ..., error: _Optional[str] = ...) -> None: ...
+    template_vars: _containers.ScalarMap[str, str]
+    plugin_data: _containers.ScalarMap[str, str]
+    def __init__(self, match: bool = ..., error: _Optional[str] = ..., template_vars: _Optional[_Mapping[str, str]] = ..., plugin_data: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class GetPluginRequest(_message.Message):
     __slots__ = ("config",)
@@ -61,10 +97,29 @@ class GetPluginResponse(_message.Message):
     def __init__(self, name: _Optional[str] = ..., priority: _Optional[int] = ..., error: _Optional[str] = ...) -> None: ...
 
 class Context(_message.Message):
-    __slots__ = ("repository",)
+    __slots__ = ("repository", "pull_request", "plugin_data")
+    class PluginDataEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: str
+        value: str
+        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
     REPOSITORY_FIELD_NUMBER: _ClassVar[int]
+    PULL_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    PLUGIN_DATA_FIELD_NUMBER: _ClassVar[int]
     repository: Repository
-    def __init__(self, repository: _Optional[_Union[Repository, _Mapping]] = ...) -> None: ...
+    pull_request: PullRequest
+    plugin_data: _containers.ScalarMap[str, str]
+    def __init__(self, repository: _Optional[_Union[Repository, _Mapping]] = ..., pull_request: _Optional[_Union[PullRequest, _Mapping]] = ..., plugin_data: _Optional[_Mapping[str, str]] = ...) -> None: ...
+
+class PullRequest(_message.Message):
+    __slots__ = ("number", "web_url")
+    NUMBER_FIELD_NUMBER: _ClassVar[int]
+    WEB_URL_FIELD_NUMBER: _ClassVar[int]
+    number: int
+    web_url: str
+    def __init__(self, number: _Optional[int] = ..., web_url: _Optional[str] = ...) -> None: ...
 
 class Repository(_message.Message):
     __slots__ = ("full_name", "clone_url_http", "clone_url_ssh", "web_url")

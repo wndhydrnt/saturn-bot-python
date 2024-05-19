@@ -3,6 +3,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import contextlib
+import dataclasses
 import errno
 import os
 import random
@@ -10,17 +11,24 @@ import socket
 import sys
 import time
 from concurrent import futures
-from typing import Iterator, Mapping
+from typing import Iterator, Mapping, MutableMapping
 
 import grpc
 from grpc_health.v1 import health_pb2, health_pb2_grpc
 from grpc_health.v1.health import HealthServicer
 
-from saturn_bot import Context
 from saturn_bot.plugin import grpc_controller_pb2_grpc
 from saturn_bot.protocol.v1 import saturnbot_pb2, saturnbot_pb2_grpc
 
 BIND_IP: str = "127.0.0.1"
+
+
+@dataclasses.dataclass
+class Context:
+    plugin_data: MutableMapping[str, str]
+    pull_request: saturnbot_pb2.PullRequest
+    repository: saturnbot_pb2.Repository
+    tpl_data: MutableMapping[str, str]
 
 
 class Plugin:
@@ -63,22 +71,41 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
     def ExecuteActions(
         self, request: saturnbot_pb2.ExecuteActionsRequest, context
     ) -> saturnbot_pb2.ExecuteActionsResponse:
+        ctx = Context(
+            pull_request=request.context.pull_request,
+            repository=request.context.repository,
+            tpl_data={},
+            plugin_data=request.context.plugin_data,
+        )
         try:
             with in_checkout_dir(request.path):
-                self._plugin.apply(ctx=request.context)
+                self._plugin.apply(ctx=ctx)
         except Exception as e:
             return saturnbot_pb2.ExecuteActionsResponse(
                 error=f"failed to execute actions: {e}"
             )
 
-        return saturnbot_pb2.ExecuteActionsResponse(error=None)
+        return saturnbot_pb2.ExecuteActionsResponse(
+            error=None, plugin_data=ctx.plugin_data, template_vars=ctx.tpl_data
+        )
 
     def ExecuteFilters(
         self, request: saturnbot_pb2.ExecuteFiltersRequest, context
     ) -> saturnbot_pb2.ExecuteFiltersResponse:
+        ctx = Context(
+            pull_request=request.context.pull_request,
+            repository=request.context.repository,
+            tpl_data={},
+            plugin_data=request.context.plugin_data,
+        )
         try:
-            result = self._plugin.filter(ctx=request.context)
-            return saturnbot_pb2.ExecuteFiltersResponse(match=result, error=None)
+            result = self._plugin.filter(ctx=ctx)
+            return saturnbot_pb2.ExecuteFiltersResponse(
+                match=result,
+                error=None,
+                plugin_data=ctx.plugin_data,
+                template_vars=ctx.tpl_data,
+            )
         except Exception as e:
             return saturnbot_pb2.ExecuteFiltersResponse(
                 match=False,
@@ -101,8 +128,14 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
     def OnPrClosed(
         self, request: saturnbot_pb2.OnPrClosedRequest, context
     ) -> saturnbot_pb2.OnPrClosedResponse:
+        ctx = Context(
+            pull_request=request.context.pull_request,
+            repository=request.context.repository,
+            tpl_data={},
+            plugin_data=request.context.plugin_data,
+        )
         try:
-            self._plugin.on_pr_closed(request.context)
+            self._plugin.on_pr_closed(ctx=ctx)
             return saturnbot_pb2.OnPrClosedResponse(error=None)
         except Exception as e:
             return saturnbot_pb2.OnPrClosedResponse(
@@ -112,8 +145,14 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
     def OnPrCreated(
         self, request: saturnbot_pb2.OnPrCreatedRequest, context
     ) -> saturnbot_pb2.OnPrCreatedResponse:
+        ctx = Context(
+            pull_request=request.context.pull_request,
+            repository=request.context.repository,
+            tpl_data={},
+            plugin_data=request.context.plugin_data,
+        )
         try:
-            self._plugin.on_pr_created(request.context)
+            self._plugin.on_pr_created(ctx=ctx)
             return saturnbot_pb2.OnPrCreatedResponse(error=None)
         except Exception as e:
             return saturnbot_pb2.OnPrCreatedResponse(
@@ -123,8 +162,14 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
     def OnPrMerged(
         self, request: saturnbot_pb2.OnPrMergedRequest, context
     ) -> saturnbot_pb2.OnPrMergedResponse:
+        ctx = Context(
+            pull_request=request.context.pull_request,
+            repository=request.context.repository,
+            tpl_data={},
+            plugin_data=request.context.plugin_data,
+        )
         try:
-            self._plugin.on_pr_merged(request.context)
+            self._plugin.on_pr_merged(ctx=ctx)
             return saturnbot_pb2.OnPrMergedResponse(error=None)
         except Exception as e:
             return saturnbot_pb2.OnPrMergedResponse(

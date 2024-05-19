@@ -34,10 +34,14 @@ class UnitTestPlugin(Plugin):
         self.config_key: str = ""
 
     def apply(self, ctx: Context) -> None:
+        ctx.tpl_data["source"] = "tpl_apply"
+        ctx.plugin_data["source"] = "pd_apply"
         with open("test.txt", "w+") as f:
             f.write("unit test")
 
     def filter(self, ctx: Context) -> bool:
+        ctx.tpl_data["source"] = "tpl_filter"
+        ctx.plugin_data["source"] = "pd_filter"
         return True
 
     def init(self, config: Mapping[str, str]) -> None:
@@ -75,6 +79,8 @@ class TaskServiceTest(unittest.TestCase):
             self.assertEqual("", response.error)
             with open(os.path.join(d, "test.txt")) as f:
                 self.assertEqual("unit test", f.read())
+            self.assertEqual({"source": "pd_apply"}, response.plugin_data)
+            self.assertEqual({"source": "tpl_apply"}, response.template_vars)
 
     def test_ExecuteActions__exception(self):
         plugin = Mock(spec=Plugin)
@@ -100,6 +106,8 @@ class TaskServiceTest(unittest.TestCase):
 
         self.assertEqual("", response.error)
         self.assertTrue(response.match)
+        self.assertEqual({"source": "pd_filter"}, response.plugin_data)
+        self.assertEqual({"source": "tpl_filter"}, response.template_vars)
 
     def test_ExecuteFilters__exception(self):
         plugin = Mock(spec=Plugin)

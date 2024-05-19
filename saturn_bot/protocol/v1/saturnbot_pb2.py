@@ -18,7 +18,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&saturn_bot/protocol/v1/saturnbot.proto\x12\x0bprotocol.v1\"[\n\x15\x45xecuteActionsRequest\x12\x12\n\x04path\x18\x01 \x01(\tR\x04path\x12.\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"=\n\x16\x45xecuteActionsResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"G\n\x15\x45xecuteFiltersRequest\x12.\n\x07\x63ontext\x18\x01 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"S\n\x16\x45xecuteFiltersResponse\x12\x14\n\x05match\x18\x01 \x01(\x08R\x05match\x12\x19\n\x05\x65rror\x18\x02 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"\x90\x01\n\x10GetPluginRequest\x12\x41\n\x06\x63onfig\x18\x01 \x03(\x0b\x32).protocol.v1.GetPluginRequest.ConfigEntryR\x06\x63onfig\x1a\x39\n\x0b\x43onfigEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\"h\n\x11GetPluginResponse\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n\x08priority\x18\x02 \x01(\x05R\x08priority\x12\x19\n\x05\x65rror\x18\x03 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"B\n\x07\x43ontext\x12\x37\n\nrepository\x18\x01 \x01(\x0b\x32\x17.protocol.v1.RepositoryR\nrepository\"\x8c\x01\n\nRepository\x12\x1b\n\tfull_name\x18\x01 \x01(\tR\x08\x66ullName\x12$\n\x0e\x63lone_url_http\x18\x02 \x01(\tR\x0c\x63loneUrlHttp\x12\"\n\rclone_url_ssh\x18\x03 \x01(\tR\x0b\x63loneUrlSsh\x12\x17\n\x07web_url\x18\x04 \x01(\tR\x06webUrl\"C\n\x11OnPrClosedRequest\x12.\n\x07\x63ontext\x18\x01 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"9\n\x12OnPrClosedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"D\n\x12OnPrCreatedRequest\x12.\n\x07\x63ontext\x18\x01 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\":\n\x13OnPrCreatedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"C\n\x11OnPrMergedRequest\x12.\n\x07\x63ontext\x18\x01 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"9\n\x12OnPrMergedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error2\x8d\x04\n\rPluginService\x12[\n\x0e\x45xecuteActions\x12\".protocol.v1.ExecuteActionsRequest\x1a#.protocol.v1.ExecuteActionsResponse\"\x00\x12[\n\x0e\x45xecuteFilters\x12\".protocol.v1.ExecuteFiltersRequest\x1a#.protocol.v1.ExecuteFiltersResponse\"\x00\x12L\n\tGetPlugin\x12\x1d.protocol.v1.GetPluginRequest\x1a\x1e.protocol.v1.GetPluginResponse\"\x00\x12O\n\nOnPrClosed\x12\x1e.protocol.v1.OnPrClosedRequest\x1a\x1f.protocol.v1.OnPrClosedResponse\"\x00\x12R\n\x0bOnPrCreated\x12\x1f.protocol.v1.OnPrCreatedRequest\x1a .protocol.v1.OnPrCreatedResponse\"\x00\x12O\n\nOnPrMerged\x12\x1e.protocol.v1.OnPrMergedRequest\x1a\x1f.protocol.v1.OnPrMergedResponse\"\x00\x42n\n\x0f\x63om.protocol.v1B\x0eSaturnbotProtoP\x01\xa2\x02\x03PXX\xaa\x02\x0bProtocol.V1\xca\x02\x0bProtocol\\V1\xe2\x02\x17Protocol\\V1\\GPBMetadata\xea\x02\x0cProtocol::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&saturn_bot/protocol/v1/saturnbot.proto\x12\x0bprotocol.v1\"[\n\x15\x45xecuteActionsRequest\x12\x12\n\x04path\x18\x01 \x01(\tR\x04path\x12.\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"\xef\x02\n\x16\x45xecuteActionsResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x12Z\n\rtemplate_vars\x18\x02 \x03(\x0b\x32\x35.protocol.v1.ExecuteActionsResponse.TemplateVarsEntryR\x0ctemplateVars\x12T\n\x0bplugin_data\x18\x03 \x03(\x0b\x32\x33.protocol.v1.ExecuteActionsResponse.PluginDataEntryR\npluginData\x1a?\n\x11TemplateVarsEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x1a=\n\x0fPluginDataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x42\x08\n\x06_error\"G\n\x15\x45xecuteFiltersRequest\x12.\n\x07\x63ontext\x18\x01 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"\x85\x03\n\x16\x45xecuteFiltersResponse\x12\x14\n\x05match\x18\x01 \x01(\x08R\x05match\x12\x19\n\x05\x65rror\x18\x02 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x12Z\n\rtemplate_vars\x18\x03 \x03(\x0b\x32\x35.protocol.v1.ExecuteFiltersResponse.TemplateVarsEntryR\x0ctemplateVars\x12T\n\x0bplugin_data\x18\x04 \x03(\x0b\x32\x33.protocol.v1.ExecuteFiltersResponse.PluginDataEntryR\npluginData\x1a?\n\x11TemplateVarsEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x1a=\n\x0fPluginDataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x42\x08\n\x06_error\"\x90\x01\n\x10GetPluginRequest\x12\x41\n\x06\x63onfig\x18\x01 \x03(\x0b\x32).protocol.v1.GetPluginRequest.ConfigEntryR\x06\x63onfig\x1a\x39\n\x0b\x43onfigEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\"h\n\x11GetPluginResponse\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n\x08priority\x18\x02 \x01(\x05R\x08priority\x12\x19\n\x05\x65rror\x18\x03 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"\x9b\x02\n\x07\x43ontext\x12\x37\n\nrepository\x18\x01 \x01(\x0b\x32\x17.protocol.v1.RepositoryR\nrepository\x12@\n\x0cpull_request\x18\x02 \x01(\x0b\x32\x18.protocol.v1.PullRequestH\x00R\x0bpullRequest\x88\x01\x01\x12\x45\n\x0bplugin_data\x18\x03 \x03(\x0b\x32$.protocol.v1.Context.PluginDataEntryR\npluginData\x1a=\n\x0fPluginDataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x42\x0f\n\r_pull_request\">\n\x0bPullRequest\x12\x16\n\x06number\x18\x01 \x01(\x03R\x06number\x12\x17\n\x07web_url\x18\x02 \x01(\tR\x06webUrl\"\x8c\x01\n\nRepository\x12\x1b\n\tfull_name\x18\x01 \x01(\tR\x08\x66ullName\x12$\n\x0e\x63lone_url_http\x18\x02 \x01(\tR\x0c\x63loneUrlHttp\x12\"\n\rclone_url_ssh\x18\x03 \x01(\tR\x0b\x63loneUrlSsh\x12\x17\n\x07web_url\x18\x04 \x01(\tR\x06webUrl\"C\n\x11OnPrClosedRequest\x12.\n\x07\x63ontext\x18\x01 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"9\n\x12OnPrClosedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"D\n\x12OnPrCreatedRequest\x12.\n\x07\x63ontext\x18\x01 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\":\n\x13OnPrCreatedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error\"C\n\x11OnPrMergedRequest\x12.\n\x07\x63ontext\x18\x01 \x01(\x0b\x32\x14.protocol.v1.ContextR\x07\x63ontext\"9\n\x12OnPrMergedResponse\x12\x19\n\x05\x65rror\x18\x01 \x01(\tH\x00R\x05\x65rror\x88\x01\x01\x42\x08\n\x06_error2\x8d\x04\n\rPluginService\x12[\n\x0e\x45xecuteActions\x12\".protocol.v1.ExecuteActionsRequest\x1a#.protocol.v1.ExecuteActionsResponse\"\x00\x12[\n\x0e\x45xecuteFilters\x12\".protocol.v1.ExecuteFiltersRequest\x1a#.protocol.v1.ExecuteFiltersResponse\"\x00\x12L\n\tGetPlugin\x12\x1d.protocol.v1.GetPluginRequest\x1a\x1e.protocol.v1.GetPluginResponse\"\x00\x12O\n\nOnPrClosed\x12\x1e.protocol.v1.OnPrClosedRequest\x1a\x1f.protocol.v1.OnPrClosedResponse\"\x00\x12R\n\x0bOnPrCreated\x12\x1f.protocol.v1.OnPrCreatedRequest\x1a .protocol.v1.OnPrCreatedResponse\"\x00\x12O\n\nOnPrMerged\x12\x1e.protocol.v1.OnPrMergedRequest\x1a\x1f.protocol.v1.OnPrMergedResponse\"\x00\x42n\n\x0f\x63om.protocol.v1B\x0eSaturnbotProtoP\x01\xa2\x02\x03PXX\xaa\x02\x0bProtocol.V1\xca\x02\x0bProtocol\\V1\xe2\x02\x17Protocol\\V1\\GPBMetadata\xea\x02\x0cProtocol::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -26,38 +26,60 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'saturn_bot.protocol.v1.satu
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n\017com.protocol.v1B\016SaturnbotProtoP\001\242\002\003PXX\252\002\013Protocol.V1\312\002\013Protocol\\V1\342\002\027Protocol\\V1\\GPBMetadata\352\002\014Protocol::V1'
+  _globals['_EXECUTEACTIONSRESPONSE_TEMPLATEVARSENTRY']._options = None
+  _globals['_EXECUTEACTIONSRESPONSE_TEMPLATEVARSENTRY']._serialized_options = b'8\001'
+  _globals['_EXECUTEACTIONSRESPONSE_PLUGINDATAENTRY']._options = None
+  _globals['_EXECUTEACTIONSRESPONSE_PLUGINDATAENTRY']._serialized_options = b'8\001'
+  _globals['_EXECUTEFILTERSRESPONSE_TEMPLATEVARSENTRY']._options = None
+  _globals['_EXECUTEFILTERSRESPONSE_TEMPLATEVARSENTRY']._serialized_options = b'8\001'
+  _globals['_EXECUTEFILTERSRESPONSE_PLUGINDATAENTRY']._options = None
+  _globals['_EXECUTEFILTERSRESPONSE_PLUGINDATAENTRY']._serialized_options = b'8\001'
   _globals['_GETPLUGINREQUEST_CONFIGENTRY']._options = None
   _globals['_GETPLUGINREQUEST_CONFIGENTRY']._serialized_options = b'8\001'
+  _globals['_CONTEXT_PLUGINDATAENTRY']._options = None
+  _globals['_CONTEXT_PLUGINDATAENTRY']._serialized_options = b'8\001'
   _globals['_EXECUTEACTIONSREQUEST']._serialized_start=55
   _globals['_EXECUTEACTIONSREQUEST']._serialized_end=146
-  _globals['_EXECUTEACTIONSRESPONSE']._serialized_start=148
-  _globals['_EXECUTEACTIONSRESPONSE']._serialized_end=209
-  _globals['_EXECUTEFILTERSREQUEST']._serialized_start=211
-  _globals['_EXECUTEFILTERSREQUEST']._serialized_end=282
-  _globals['_EXECUTEFILTERSRESPONSE']._serialized_start=284
-  _globals['_EXECUTEFILTERSRESPONSE']._serialized_end=367
-  _globals['_GETPLUGINREQUEST']._serialized_start=370
-  _globals['_GETPLUGINREQUEST']._serialized_end=514
-  _globals['_GETPLUGINREQUEST_CONFIGENTRY']._serialized_start=457
-  _globals['_GETPLUGINREQUEST_CONFIGENTRY']._serialized_end=514
-  _globals['_GETPLUGINRESPONSE']._serialized_start=516
-  _globals['_GETPLUGINRESPONSE']._serialized_end=620
-  _globals['_CONTEXT']._serialized_start=622
-  _globals['_CONTEXT']._serialized_end=688
-  _globals['_REPOSITORY']._serialized_start=691
-  _globals['_REPOSITORY']._serialized_end=831
-  _globals['_ONPRCLOSEDREQUEST']._serialized_start=833
-  _globals['_ONPRCLOSEDREQUEST']._serialized_end=900
-  _globals['_ONPRCLOSEDRESPONSE']._serialized_start=902
-  _globals['_ONPRCLOSEDRESPONSE']._serialized_end=959
-  _globals['_ONPRCREATEDREQUEST']._serialized_start=961
-  _globals['_ONPRCREATEDREQUEST']._serialized_end=1029
-  _globals['_ONPRCREATEDRESPONSE']._serialized_start=1031
-  _globals['_ONPRCREATEDRESPONSE']._serialized_end=1089
-  _globals['_ONPRMERGEDREQUEST']._serialized_start=1091
-  _globals['_ONPRMERGEDREQUEST']._serialized_end=1158
-  _globals['_ONPRMERGEDRESPONSE']._serialized_start=1160
-  _globals['_ONPRMERGEDRESPONSE']._serialized_end=1217
-  _globals['_PLUGINSERVICE']._serialized_start=1220
-  _globals['_PLUGINSERVICE']._serialized_end=1745
+  _globals['_EXECUTEACTIONSRESPONSE']._serialized_start=149
+  _globals['_EXECUTEACTIONSRESPONSE']._serialized_end=516
+  _globals['_EXECUTEACTIONSRESPONSE_TEMPLATEVARSENTRY']._serialized_start=380
+  _globals['_EXECUTEACTIONSRESPONSE_TEMPLATEVARSENTRY']._serialized_end=443
+  _globals['_EXECUTEACTIONSRESPONSE_PLUGINDATAENTRY']._serialized_start=445
+  _globals['_EXECUTEACTIONSRESPONSE_PLUGINDATAENTRY']._serialized_end=506
+  _globals['_EXECUTEFILTERSREQUEST']._serialized_start=518
+  _globals['_EXECUTEFILTERSREQUEST']._serialized_end=589
+  _globals['_EXECUTEFILTERSRESPONSE']._serialized_start=592
+  _globals['_EXECUTEFILTERSRESPONSE']._serialized_end=981
+  _globals['_EXECUTEFILTERSRESPONSE_TEMPLATEVARSENTRY']._serialized_start=380
+  _globals['_EXECUTEFILTERSRESPONSE_TEMPLATEVARSENTRY']._serialized_end=443
+  _globals['_EXECUTEFILTERSRESPONSE_PLUGINDATAENTRY']._serialized_start=445
+  _globals['_EXECUTEFILTERSRESPONSE_PLUGINDATAENTRY']._serialized_end=506
+  _globals['_GETPLUGINREQUEST']._serialized_start=984
+  _globals['_GETPLUGINREQUEST']._serialized_end=1128
+  _globals['_GETPLUGINREQUEST_CONFIGENTRY']._serialized_start=1071
+  _globals['_GETPLUGINREQUEST_CONFIGENTRY']._serialized_end=1128
+  _globals['_GETPLUGINRESPONSE']._serialized_start=1130
+  _globals['_GETPLUGINRESPONSE']._serialized_end=1234
+  _globals['_CONTEXT']._serialized_start=1237
+  _globals['_CONTEXT']._serialized_end=1520
+  _globals['_CONTEXT_PLUGINDATAENTRY']._serialized_start=445
+  _globals['_CONTEXT_PLUGINDATAENTRY']._serialized_end=506
+  _globals['_PULLREQUEST']._serialized_start=1522
+  _globals['_PULLREQUEST']._serialized_end=1584
+  _globals['_REPOSITORY']._serialized_start=1587
+  _globals['_REPOSITORY']._serialized_end=1727
+  _globals['_ONPRCLOSEDREQUEST']._serialized_start=1729
+  _globals['_ONPRCLOSEDREQUEST']._serialized_end=1796
+  _globals['_ONPRCLOSEDRESPONSE']._serialized_start=1798
+  _globals['_ONPRCLOSEDRESPONSE']._serialized_end=1855
+  _globals['_ONPRCREATEDREQUEST']._serialized_start=1857
+  _globals['_ONPRCREATEDREQUEST']._serialized_end=1925
+  _globals['_ONPRCREATEDRESPONSE']._serialized_start=1927
+  _globals['_ONPRCREATEDRESPONSE']._serialized_end=1985
+  _globals['_ONPRMERGEDREQUEST']._serialized_start=1987
+  _globals['_ONPRMERGEDREQUEST']._serialized_end=2054
+  _globals['_ONPRMERGEDRESPONSE']._serialized_start=2056
+  _globals['_ONPRMERGEDRESPONSE']._serialized_end=2113
+  _globals['_PLUGINSERVICE']._serialized_start=2116
+  _globals['_PLUGINSERVICE']._serialized_end=2641
 # @@protoc_insertion_point(module_scope)
