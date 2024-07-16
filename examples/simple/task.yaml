@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://saturn-bot.readthedocs.io/en/latest/schemas/task.schema.json
+name: saturn-bot Plugin Python
+
+plugins:
+  - path: .task.py
+    configuration:
+      message: "Hello Python Plugin"

@@ -16,7 +16,7 @@ header:
     - '**/*.yml'
     - '**/*.toml'
     - '.python-version'
-    - '.*ignore'
+    - '**/.*ignore'
     - '**/*.mako'
     - 'README'
     - '*.lock'
