@@ -8,6 +8,7 @@ from saturn_bot import Context, Plugin, serve_plugin
 
 
 class Example(Plugin):
+    name = "plugin"
     message: str
 
     def init(self, config: Mapping[str, str]) -> None:

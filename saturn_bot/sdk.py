@@ -25,10 +25,9 @@ BIND_IP: str = "127.0.0.1"
 
 @dataclasses.dataclass
 class Context:
-    plugin_data: MutableMapping[str, str]
     pull_request: saturnbot_pb2.PullRequest
     repository: saturnbot_pb2.Repository
-    template_vars: MutableMapping[str, str]
+    run_data: MutableMapping[str, str]
 
 
 class Plugin:
@@ -74,8 +73,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         ctx = Context(
             pull_request=request.context.pull_request,
             repository=request.context.repository,
-            template_vars={},
-            plugin_data=request.context.plugin_data,
+            run_data=request.context.run_data,
         )
         try:
             with in_checkout_dir(request.path):
@@ -85,9 +83,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
                 error=f"failed to execute actions: {e}"
             )
 
-        return saturnbot_pb2.ExecuteActionsResponse(
-            error=None, plugin_data=ctx.plugin_data, template_vars=ctx.template_vars
-        )
+        return saturnbot_pb2.ExecuteActionsResponse(error=None, run_data=ctx.run_data)
 
     def ExecuteFilters(
         self, request: saturnbot_pb2.ExecuteFiltersRequest, context
@@ -95,16 +91,14 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         ctx = Context(
             pull_request=request.context.pull_request,
             repository=request.context.repository,
-            template_vars={},
-            plugin_data=request.context.plugin_data,
+            run_data=request.context.run_data,
         )
         try:
             result = self._plugin.filter(ctx=ctx)
             return saturnbot_pb2.ExecuteFiltersResponse(
                 match=result,
                 error=None,
-                plugin_data=ctx.plugin_data,
-                template_vars=ctx.template_vars,
+                run_data=request.context.run_data,
             )
         except Exception as e:
             return saturnbot_pb2.ExecuteFiltersResponse(
@@ -131,8 +125,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         ctx = Context(
             pull_request=request.context.pull_request,
             repository=request.context.repository,
-            template_vars={},
-            plugin_data=request.context.plugin_data,
+            run_data=request.context.run_data,
         )
         try:
             self._plugin.on_pr_closed(ctx=ctx)
@@ -148,8 +141,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         ctx = Context(
             pull_request=request.context.pull_request,
             repository=request.context.repository,
-            template_vars={},
-            plugin_data=request.context.plugin_data,
+            run_data=request.context.run_data,
         )
         try:
             self._plugin.on_pr_created(ctx=ctx)
@@ -165,8 +157,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         ctx = Context(
             pull_request=request.context.pull_request,
             repository=request.context.repository,
-            template_vars={},
-            plugin_data=request.context.plugin_data,
+            run_data=request.context.run_data,
         )
         try:
             self._plugin.on_pr_merged(ctx=ctx)

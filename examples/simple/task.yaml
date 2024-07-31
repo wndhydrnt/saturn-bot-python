@@ -2,6 +2,6 @@
 name: saturn-bot Plugin Python
 
 plugins:
-  - path: .task.py
+  - path: plugin.py
     configuration:
       message: "Hello Python Plugin"

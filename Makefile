@@ -1,4 +1,4 @@
-PROTOCOL_VERSION?=v0.9.0
+PROTOCOL_VERSION?=v0.10.0
 
 clean:
 	rm saturn_bot/protocol/v1/saturnbot.proto
