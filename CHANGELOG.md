@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.0](https://github.com/wndhydrnt/saturn-bot-python/compare/v0.4.0...v0.5.0) (2024-07-31)
+
+
+### Features
+
+* Upgrade protocol to v0.10.0 ([61112a1](https://github.com/wndhydrnt/saturn-bot-python/commit/61112a19e015ff08243ac28ee5b8531ac4115944))
+
+
+### Documentation
+
+* Add an example ([#7](https://github.com/wndhydrnt/saturn-bot-python/issues/7)) ([01838d8](https://github.com/wndhydrnt/saturn-bot-python/commit/01838d80fc24734442295e78377fe70c4396e11d))
+
 ## [0.4.0](https://github.com/wndhydrnt/saturn-bot-python/compare/v0.3.0...v0.4.0) (2024-05-19)
 
 
