@@ -20,6 +20,8 @@ class Example(Plugin):
         return ctx.repository.full_name == "github.com/wndhydrnt/saturn-bot-example"
 
     def apply(self, ctx: Context) -> None:
+        # This print message is sent to saturn-bot and printed in its log.
+        print("apply started")
         # Create a file in the root of the repository.
         with open("hello-python.txt", "w+") as f:
             f.write(f"{self.message}\n")

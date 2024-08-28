@@ -6,21 +6,30 @@ import contextlib
 import dataclasses
 import errno
 import os
+import queue
 import random
 import socket
 import sys
 import time
 from concurrent import futures
-from typing import Iterator, Mapping, MutableMapping
+from typing import Iterator, Mapping, MutableMapping, AnyStr
 
 import grpc
 from grpc_health.v1 import health_pb2, health_pb2_grpc
 from grpc_health.v1.health import HealthServicer
 
-from saturn_bot.plugin import grpc_controller_pb2_grpc
+from saturn_bot.plugin import (
+    grpc_controller_pb2_grpc,
+    grpc_stdio_pb2_grpc,
+    grpc_stdio_pb2,
+)
 from saturn_bot.protocol.v1 import saturnbot_pb2, saturnbot_pb2_grpc
 
 BIND_IP: str = "127.0.0.1"
+
+# Capture original streams for later use before stderr/stdout redirection.
+sys_stderr = sys.stderr
+sys_stdout = sys.stdout
 
 
 @dataclasses.dataclass
@@ -176,9 +185,72 @@ class GRPCController(grpc_controller_pb2_grpc.GRPCControllerServicer):
         self.is_shut_down = True
 
 
+class StdioAdapter:
+    """
+    StdioAdapter implements all methods needed to replace default stderr and stdout
+    IO objects.
+    Any message written to it is being put into a queue.
+    """
+
+    def __init__(self, channel: grpc_stdio_pb2.StdioData.Channel, q: queue.SimpleQueue):
+        self._chan = channel
+        self._q = q
+
+    def flush(self):
+        """
+        flush implements TextIO.
+        """
+        while True:
+            if self._q.empty() is True:
+                return
+
+    def write(self, msg: AnyStr) -> int:
+        """
+        write implements TextIO.
+        """
+        self._q.put_nowait(
+            grpc_stdio_pb2.StdioData(channel=self._chan, data=msg.encode("utf-8"))
+        )
+        return len(msg)
+
+
+class StdioServicer(grpc_stdio_pb2_grpc.GRPCStdioServicer):
+    """
+    StdioServicer streams output to the main process of saturn-bot via gRPC.
+    """
+
+    def __init__(self, q: queue.SimpleQueue, shutdown_ctrl: GRPCController):
+        self._q = q
+        self._shutdown_ctrl = shutdown_ctrl
+
+    def StreamStdio(self, request, context):
+        """
+        StreamStdio implements GRPCStdioServicer.
+        It reads the messages to forward from a queue.
+        """
+        while True:
+            try:
+                entry: grpc_stdio_pb2.StdioData = self._q.get(block=True, timeout=0.1)
+                yield entry
+            except queue.Empty:
+                pass
+
+            if self._shutdown_ctrl.is_shut_down is True:
+                return
+
+
 def serve(port: int, shutdown: GRPCController, plugin: Plugin):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     server.add_insecure_port(f"{BIND_IP}:{port}")
+
+    # Set up redirection of stderr and stdout.
+    stdio_queue = queue.SimpleQueue()
+    stdio_servicer = StdioServicer(q=stdio_queue, shutdown_ctrl=shutdown)
+    sys.stderr = StdioAdapter(channel=grpc_stdio_pb2.StdioData.STDERR, q=stdio_queue)
+    sys.stdout = StdioAdapter(channel=grpc_stdio_pb2.StdioData.STDOUT, q=stdio_queue)
+    grpc_stdio_pb2_grpc.add_GRPCStdioServicer_to_server(
+        servicer=stdio_servicer, server=server
+    )
 
     saturnbot_pb2_grpc.add_PluginServiceServicer_to_server(
         servicer=PluginService(plugin), server=server
@@ -199,8 +271,10 @@ def serve_plugin(plugin: Plugin) -> None:
     port = _find_open_port()
     grpc_controller = GRPCController()
     server = serve(port=port, shutdown=grpc_controller, plugin=plugin)
-    print(f"1|1|tcp|{BIND_IP}:{port}|grpc")
-    sys.stdout.flush()
+    # Default sys.stdout is being redirected.
+    # Use the original stream to write to stdout of the plugin process.
+    print(f"1|1|tcp|{BIND_IP}:{port}|grpc", file=sys_stdout)
+    sys_stdout.flush()
     try:
         while True:
             time.sleep(0.1)
