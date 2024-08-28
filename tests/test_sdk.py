@@ -13,12 +13,12 @@ from saturn_bot import Context, Plugin
 from saturn_bot.plugin.grpc_stdio_pb2 import StdioData
 from saturn_bot.protocol.v1 import saturnbot_pb2
 from saturn_bot.sdk import (
+    GRPCController,
     PluginService,
+    StdioAdapter,
+    StdioServicer,
     _find_open_port,
     serve,
-    StdioServicer,
-    StdioAdapter,
-    GRPCController,
 )
 
 

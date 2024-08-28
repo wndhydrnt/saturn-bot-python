@@ -5,14 +5,16 @@
 import contextlib
 import dataclasses
 import errno
+import io
 import os
 import queue
 import random
 import socket
 import sys
 import time
+import typing
 from concurrent import futures
-from typing import Iterator, Mapping, MutableMapping, AnyStr
+from typing import AnyStr, Generator, Iterator, Mapping, MutableMapping
 
 import grpc
 from grpc_health.v1 import health_pb2, health_pb2_grpc
@@ -20,8 +22,8 @@ from grpc_health.v1.health import HealthServicer
 
 from saturn_bot.plugin import (
     grpc_controller_pb2_grpc,
-    grpc_stdio_pb2_grpc,
     grpc_stdio_pb2,
+    grpc_stdio_pb2_grpc,
 )
 from saturn_bot.protocol.v1 import saturnbot_pb2, saturnbot_pb2_grpc
 
@@ -185,7 +187,7 @@ class GRPCController(grpc_controller_pb2_grpc.GRPCControllerServicer):
         self.is_shut_down = True
 
 
-class StdioAdapter:
+class StdioAdapter(typing.TextIO):
     """
     StdioAdapter implements all methods needed to replace default stderr and stdout
     IO objects.
@@ -195,6 +197,57 @@ class StdioAdapter:
     def __init__(self, channel: grpc_stdio_pb2.StdioData.Channel, q: queue.SimpleQueue):
         self._chan = channel
         self._q = q
+
+    def __exit__(self, __type, __value, __traceback):
+        raise io.UnsupportedOperation()
+
+    def __iter__(self):
+        raise io.UnsupportedOperation()
+
+    def __next__(self):
+        raise io.UnsupportedOperation()
+
+    def writelines(self, __lines):
+        raise io.UnsupportedOperation()
+
+    def writable(self):
+        raise io.UnsupportedOperation()
+
+    def truncate(self, __size=None):
+        raise io.UnsupportedOperation()
+
+    def tell(self):
+        raise io.UnsupportedOperation()
+
+    def seekable(self):
+        raise io.UnsupportedOperation()
+
+    def seek(self, __offset, __whence=0):
+        raise io.UnsupportedOperation()
+
+    def readlines(self, __hint=-1):
+        raise io.UnsupportedOperation()
+
+    def readline(self, __limit=-1):
+        raise io.UnsupportedOperation()
+
+    def readable(self):
+        raise io.UnsupportedOperation()
+
+    def read(self, __n=-1):
+        raise io.UnsupportedOperation()
+
+    def isatty(self):
+        raise io.UnsupportedOperation()
+
+    def fileno(self):
+        raise io.UnsupportedOperation()
+
+    def close(self):
+        raise io.UnsupportedOperation()
+
+    def __enter__(self):
+        raise io.UnsupportedOperation()
 
     def flush(self):
         """
@@ -208,9 +261,12 @@ class StdioAdapter:
         """
         write implements TextIO.
         """
-        self._q.put_nowait(
-            grpc_stdio_pb2.StdioData(channel=self._chan, data=msg.encode("utf-8"))
-        )
+        if isinstance(msg, str):
+            data = msg.encode("utf-8")
+        else:
+            data = msg
+
+        self._q.put_nowait(grpc_stdio_pb2.StdioData(channel=self._chan, data=data))
         return len(msg)
 
 
@@ -223,7 +279,9 @@ class StdioServicer(grpc_stdio_pb2_grpc.GRPCStdioServicer):
         self._q = q
         self._shutdown_ctrl = shutdown_ctrl
 
-    def StreamStdio(self, request, context):
+    def StreamStdio(
+        self, request, context
+    ) -> Generator[grpc_stdio_pb2.StdioData, None, None]:
         """
         StreamStdio implements GRPCStdioServicer.
         It reads the messages to forward from a queue.
@@ -244,7 +302,7 @@ def serve(port: int, shutdown: GRPCController, plugin: Plugin):
     server.add_insecure_port(f"{BIND_IP}:{port}")
 
     # Set up redirection of stderr and stdout.
-    stdio_queue = queue.SimpleQueue()
+    stdio_queue: queue.SimpleQueue = queue.SimpleQueue()
     stdio_servicer = StdioServicer(q=stdio_queue, shutdown_ctrl=shutdown)
     sys.stderr = StdioAdapter(channel=grpc_stdio_pb2.StdioData.STDERR, q=stdio_queue)
     sys.stdout = StdioAdapter(channel=grpc_stdio_pb2.StdioData.STDOUT, q=stdio_queue)
