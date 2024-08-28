@@ -3,23 +3,14 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os.path
-import queue
 import tempfile
 import unittest
 from typing import Mapping
 from unittest.mock import Mock
 
-from saturn_bot import Context, Plugin
-from saturn_bot.plugin.grpc_stdio_pb2 import StdioData
+from saturn_bot import Context, Plugin, controller
 from saturn_bot.protocol.v1 import saturnbot_pb2
-from saturn_bot.sdk import (
-    GRPCController,
-    PluginService,
-    StdioAdapter,
-    StdioServicer,
-    _find_open_port,
-    serve,
-)
+from saturn_bot.sdk import PluginService, _find_open_port, serve
 
 
 class UnitTestPlugin(Plugin):
@@ -229,23 +220,6 @@ class ServeTest(unittest.TestCase):
     def test_serve(self):
         port = _find_open_port()
         plugin = UnitTestPlugin()
-        grpc_controller = GRPCController()
+        grpc_controller = controller.Servicer()
         server = serve(port=port, shutdown=grpc_controller, plugin=plugin)
         server.stop(0)
-
-
-class StdioServicerTest(unittest.TestCase):
-    def test_StreamStdio(self):
-        q = queue.SimpleQueue()
-        stdio_adapter = StdioAdapter(channel=StdioData.STDOUT, q=q)
-        grpc_controller = GRPCController()
-        # Shut down immediately to avoid a deadlock.
-        grpc_controller.Shutdown(None, None)
-
-        stdio_servicer = StdioServicer(q=q, shutdown_ctrl=grpc_controller)
-        stdio_adapter.write("test message")
-        result = list(stdio_servicer.StreamStdio(None, None))
-        self.assertEqual(1, len(result))
-        entry = result[0]
-        self.assertEqual(StdioData.STDOUT, entry.channel)
-        self.assertEqual("test message".encode("utf-8"), entry.data)
