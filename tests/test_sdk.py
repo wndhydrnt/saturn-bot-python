@@ -8,8 +8,7 @@ import unittest
 from typing import Mapping
 from unittest.mock import Mock
 
-from saturn_bot import Context, Plugin
-from saturn_bot.plugin.grpc_controller_pb2_grpc import GRPCController
+from saturn_bot import Context, Plugin, controller
 from saturn_bot.protocol.v1 import saturnbot_pb2
 from saturn_bot.sdk import PluginService, _find_open_port, serve
 
@@ -221,6 +220,6 @@ class ServeTest(unittest.TestCase):
     def test_serve(self):
         port = _find_open_port()
         plugin = UnitTestPlugin()
-        grpc_controller = GRPCController()
+        grpc_controller = controller.Servicer()
         server = serve(port=port, shutdown=grpc_controller, plugin=plugin)
         server.stop(0)

@@ -1,3 +1,3 @@
 [flake8]
 extend-ignore = E501
-exclude = .venv,saturn_bot/plugin,saturn_bot/protocol
+exclude = .venv,saturn_bot/plugin,saturn_bot/protocol,examples/simple/venv

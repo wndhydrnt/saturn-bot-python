@@ -3,8 +3,9 @@ PROTOCOL_VERSION?=v0.10.0
 clean:
 	rm saturn_bot/protocol/v1/saturnbot.proto
 	rm saturn_bot/plugin/grpc_controller.proto
+	rm saturn_bot/plugin/grpc_stdio.proto
 
-generate: saturn_bot/protocol/v1/saturnbot.proto saturn_bot/plugin/grpc_controller.proto
+generate: saturn_bot/protocol/v1/saturnbot.proto saturn_bot/plugin/grpc_controller.proto saturn_bot/plugin/grpc_stdio.proto
 	buf generate
 	touch saturn_bot/protocol/__init__.py
 	touch saturn_bot/protocol/v1/__init__.py
@@ -18,6 +19,10 @@ saturn_bot/protocol/v1/saturnbot.proto:
 saturn_bot/plugin/grpc_controller.proto:
 	mkdir -p ./plugin/
 	curl -L -o ./saturn_bot/plugin/grpc_controller.proto --silent --fail https://raw.githubusercontent.com/hashicorp/go-plugin/v1.6.0/internal/plugin/grpc_controller.proto
+
+saturn_bot/plugin/grpc_stdio.proto:
+	mkdir -p ./plugin/
+	curl -L -o ./saturn_bot/plugin/grpc_stdio.proto --silent --fail https://raw.githubusercontent.com/hashicorp/go-plugin/v1.6.0/internal/plugin/grpc_stdio.proto
 
 lint:
 	poetry run black --check .
