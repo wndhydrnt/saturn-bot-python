@@ -1,6 +1,10 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 import os.path
 import tempfile
-from typing import Mapping
+from typing import Mapping, Optional
 
 from saturn_bot import Plugin, serve_plugin, Context
 
@@ -9,7 +13,7 @@ class IntegrationTest(Plugin):
     name = "integration-test"
 
     def __init__(self) -> None:
-        self.event_out_tmp_file_path: str | None = None
+        self.event_out_tmp_file_path: Optional[str] = None
         self.static_content: str = ""
 
     def apply(self, ctx: Context) -> None:
