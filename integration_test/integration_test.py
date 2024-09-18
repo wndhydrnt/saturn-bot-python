@@ -6,7 +6,7 @@ import os.path
 import tempfile
 from typing import Mapping, Optional
 
-from saturn_bot import Plugin, serve_plugin, Context
+from saturn_bot import Context, Plugin, serve_plugin
 
 
 class IntegrationTest(Plugin):
