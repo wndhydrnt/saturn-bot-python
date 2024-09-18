@@ -46,4 +46,4 @@ $(INTEGRATION_TEST_PATH):
 	chmod +x $(INTEGRATION_TEST_PATH)
 
 test_integration: $(INTEGRATION_TEST_PATH)
-	$(INTEGRATION_TEST_PATH) -path integration_test/plugin.py
+	$(INTEGRATION_TEST_PATH) -path integration_test/integration_test.py
