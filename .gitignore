@@ -2,3 +2,4 @@
 __pycache__/
 .coverage
 htmlcov/
+integration_test/integration-test-*

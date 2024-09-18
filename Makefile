@@ -1,4 +1,6 @@
-PROTOCOL_VERSION?=v0.10.0
+PROTOCOL_VERSION?=v0.11.1
+INTEGRATION_TEST_BIN=integration-test-$(PROTOCOL_VERSION).$(shell uname -s)-$(shell uname -m)
+INTEGRATION_TEST_PATH=integration_test/$(INTEGRATION_TEST_BIN)
 
 clean:
 	rm saturn_bot/protocol/v1/saturnbot.proto
@@ -38,3 +40,10 @@ test_coverage:
 	rm -rf ./htmlcov/
 	poetry run coverage run
 	poetry run coverage html
+
+$(INTEGRATION_TEST_PATH):
+	curl -fsSL -o $(INTEGRATION_TEST_PATH) "https://github.com/wndhydrnt/saturn-bot-protocol/releases/download/$(PROTOCOL_VERSION)/$(INTEGRATION_TEST_BIN)"
+	chmod +x $(INTEGRATION_TEST_PATH)
+
+test_integration: $(INTEGRATION_TEST_PATH)
+	$(INTEGRATION_TEST_PATH) -path integration_test/plugin.py
