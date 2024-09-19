@@ -1,6 +1,7 @@
-PROTOCOL_VERSION?=v0.11.2
+PROTOCOL_VERSION?=v0.11.3
 INTEGRATION_TEST_BIN=integration-test-$(PROTOCOL_VERSION).$(shell uname -s)-$(shell uname -m)
 INTEGRATION_TEST_PATH=integration_test/$(INTEGRATION_TEST_BIN)
+SATURN_BOT_BIN_PATH?=saturn-bot
 
 clean:
 	rm saturn_bot/protocol/v1/saturnbot.proto
@@ -46,4 +47,4 @@ $(INTEGRATION_TEST_PATH):
 	chmod +x $(INTEGRATION_TEST_PATH)
 
 test_integration: $(INTEGRATION_TEST_PATH)
-	poetry run $(INTEGRATION_TEST_PATH) -path integration_test/integration_test.py
+	poetry run $(INTEGRATION_TEST_PATH) -plugin-path integration_test/integration_test.py -saturn-bot-path $(SATURN_BOT_BIN_PATH)
