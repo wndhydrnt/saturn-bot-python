@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/wndhydrnt/saturn-bot-python/compare/v0.5.0...v0.6.0) (2024-09-28)
+
+
+### Features
+
+* **sdk:** Send stdout and stderr of plugin to saturn-bot ([#9](https://github.com/wndhydrnt/saturn-bot-python/issues/9)) ([d062d51](https://github.com/wndhydrnt/saturn-bot-python/commit/d062d51c351442aca3c9b3f02c9192724c46fcbb))
+
+
+### Bug Fixes
+
+* **sdk:** Upgrade protocol to v0.11.4 ([b4bf65d](https://github.com/wndhydrnt/saturn-bot-python/commit/b4bf65d8805cf8c1ce71fa1119334c77a92f402a))
+
 ## [0.5.0](https://github.com/wndhydrnt/saturn-bot-python/compare/v0.4.0...v0.5.0) (2024-07-31)
 
 
