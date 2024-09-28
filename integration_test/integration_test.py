@@ -3,6 +3,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import os.path
+import sys
 import tempfile
 from typing import Mapping, Optional
 
@@ -17,6 +18,13 @@ class IntegrationTest(Plugin):
         self.static_content: str = ""
 
     def apply(self, ctx: Context) -> None:
+        if ctx.repository.full_name == "git.localhost/integration/log":
+            # Writes to stdout
+            print("Integration Test")
+            # Writes to stderr
+            print("Integration Test", file=sys.stderr)
+            return
+
         with open("integration-test.txt", "w") as f:
             f.write(self.static_content)
             f.write("\n")

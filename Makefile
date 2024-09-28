@@ -1,4 +1,4 @@
-PROTOCOL_VERSION?=v0.11.3
+PROTOCOL_VERSION?=v0.11.4
 INTEGRATION_TEST_BIN=integration-test-$(PROTOCOL_VERSION).$(shell uname -s)-$(shell uname -m)
 INTEGRATION_TEST_PATH=integration_test/$(INTEGRATION_TEST_BIN)
 SATURN_BOT_BIN_PATH?=saturn-bot
