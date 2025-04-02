@@ -89,7 +89,7 @@ class TaskServiceTest(unittest.TestCase):
             service = PluginService(plugin)
             response = service.ExecuteActions(request=request, context={})
 
-            self.assertEqual("failed to execute actions: plugin failed", response.error)
+            self.assertIn("RuntimeError: plugin failed", response.error)
             self.assertFalse(os.path.exists(os.path.join(d, "test.txt")))
 
     def test_ExecuteFilters(self):
@@ -114,7 +114,7 @@ class TaskServiceTest(unittest.TestCase):
         service = PluginService(plugin)
         response = service.ExecuteFilters(request=request, context={})
 
-        self.assertEqual("failed to execute filters: task failed", response.error)
+        self.assertIn("RuntimeError: task failed", response.error)
         self.assertFalse(response.match)
 
     def test_GetPlugin(self):
@@ -138,10 +138,7 @@ class TaskServiceTest(unittest.TestCase):
         service = PluginService(plugin)
         response = service.GetPlugin(request=request, context={})
 
-        self.assertEqual(
-            "plugin 'Unit Test' failed during initialization: plugin failed",
-            response.error,
-        )
+        self.assertIn("RuntimeError: plugin failed", response.error)
 
     def test_OnPrClosed(self):
         plugin = UnitTestPlugin()
@@ -162,9 +159,7 @@ class TaskServiceTest(unittest.TestCase):
         service = PluginService(plugin)
         response = service.OnPrClosed(request=request, context={})
 
-        self.assertEqual(
-            "failed to execute OnPrClosed event: on_pr_closed failed", response.error
-        )
+        self.assertIn("RuntimeError: on_pr_closed failed", response.error)
         self.assertFalse(plugin.on_pr_closed_called)
 
     def test_OnPrCreated(self):
@@ -186,9 +181,7 @@ class TaskServiceTest(unittest.TestCase):
         service = PluginService(plugin)
         response = service.OnPrCreated(request=request, context={})
 
-        self.assertEqual(
-            "failed to execute OnPrCreated event: on_pr_created failed", response.error
-        )
+        self.assertIn("RuntimeError: on_pr_created failed", response.error)
         self.assertFalse(plugin.on_pr_closed_called)
 
     def test_OnPrMerged(self):
@@ -210,9 +203,7 @@ class TaskServiceTest(unittest.TestCase):
         service = PluginService(plugin)
         response = service.OnPrMerged(request=request, context={})
 
-        self.assertEqual(
-            "failed to execute OnPrMerged event: on_pr_merged failed", response.error
-        )
+        self.assertIn("RuntimeError: on_pr_merged failed", response.error)
         self.assertFalse(plugin.on_pr_merged_called)
 
 

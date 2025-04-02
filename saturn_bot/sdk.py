@@ -11,6 +11,7 @@ import random
 import socket
 import sys
 import time
+import traceback
 from concurrent import futures
 from typing import Iterator, Mapping, MutableMapping
 
@@ -88,9 +89,9 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         try:
             with in_checkout_dir(request.path):
                 self._plugin.apply(ctx=ctx)
-        except Exception as e:
+        except Exception:
             return saturnbot_pb2.ExecuteActionsResponse(
-                error=f"failed to execute actions: {e}"
+                error=traceback.format_exc(),
             )
 
         return saturnbot_pb2.ExecuteActionsResponse(error=None, run_data=ctx.run_data)
@@ -110,10 +111,10 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
                 error=None,
                 run_data=request.context.run_data,
             )
-        except Exception as e:
+        except Exception:
             return saturnbot_pb2.ExecuteFiltersResponse(
                 match=False,
-                error=f"failed to execute filters: {e}",
+                error=traceback.format_exc(),
             )
 
     def GetPlugin(
@@ -124,9 +125,9 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
             return saturnbot_pb2.GetPluginResponse(
                 name=self._plugin.name, priority=self._plugin.priority, error=None
             )
-        except Exception as e:
+        except Exception:
             return saturnbot_pb2.GetPluginResponse(
-                error=f"plugin '{self._plugin.name}' failed during initialization: {e}"
+                error=traceback.format_exc(),
             )
 
     def OnPrClosed(
@@ -140,9 +141,9 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         try:
             self._plugin.on_pr_closed(ctx=ctx)
             return saturnbot_pb2.OnPrClosedResponse(error=None)
-        except Exception as e:
+        except Exception:
             return saturnbot_pb2.OnPrClosedResponse(
-                error=f"failed to execute OnPrClosed event: {e}"
+                error=traceback.format_exc(),
             )
 
     def OnPrCreated(
@@ -156,9 +157,9 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         try:
             self._plugin.on_pr_created(ctx=ctx)
             return saturnbot_pb2.OnPrCreatedResponse(error=None)
-        except Exception as e:
+        except Exception:
             return saturnbot_pb2.OnPrCreatedResponse(
-                error=f"failed to execute OnPrCreated event: {e}"
+                error=traceback.format_exc(),
             )
 
     def OnPrMerged(
@@ -172,9 +173,9 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
         try:
             self._plugin.on_pr_merged(ctx=ctx)
             return saturnbot_pb2.OnPrMergedResponse(error=None)
-        except Exception as e:
+        except Exception:
             return saturnbot_pb2.OnPrMergedResponse(
-                error=f"failed to execute OnPrMerged event: {e}"
+                error=traceback.format_exc(),
             )
 
 
