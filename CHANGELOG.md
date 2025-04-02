@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/wndhydrnt/saturn-bot-python/compare/v0.6.0...v0.7.0) (2025-04-02)
+
+
+### Features
+
+* Set exception trace as message in replies on error ([332878a](https://github.com/wndhydrnt/saturn-bot-python/commit/332878afffc2b1bd0db5f0ff8d1219c6d9df564c))
+
 ## [0.6.0](https://github.com/wndhydrnt/saturn-bot-python/compare/v0.5.0...v0.6.0) (2024-09-28)
 
 
