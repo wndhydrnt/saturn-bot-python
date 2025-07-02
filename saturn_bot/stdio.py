@@ -76,9 +76,7 @@ class Adapter(TextIO):
         """
         flush implements TextIO.
         """
-        while True:
-            if self._q.empty() is True:
-                return
+        pass
 
     def write(self, msg: AnyStr) -> int:
         """
