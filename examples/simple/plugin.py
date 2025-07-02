@@ -6,7 +6,6 @@ from typing import Mapping
 
 from saturn_bot import Context, Plugin, serve_plugin
 
-
 logger = logging.getLogger(__name__)
 
 
