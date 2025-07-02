@@ -20,6 +20,7 @@ from grpc_health.v1 import health_pb2, health_pb2_grpc
 from grpc_health.v1.health import HealthServicer
 
 from saturn_bot import controller, stdio
+from saturn_bot._log import _configure_logging
 from saturn_bot.plugin import (
     grpc_controller_pb2_grpc,
     grpc_stdio_pb2,
@@ -32,6 +33,12 @@ BIND_IP: str = "127.0.0.1"
 # Capture original streams for later use before stderr/stdout redirection.
 sys_stderr = sys.stderr
 sys_stdout = sys.stdout
+# Set up redirection of stderr and stdout.
+stdio_queue: queue.SimpleQueue = queue.SimpleQueue()
+stdio_stderr = stdio.Adapter(channel=grpc_stdio_pb2.StdioData.STDERR, q=stdio_queue)
+stdio_stdout = stdio.Adapter(channel=grpc_stdio_pb2.StdioData.STDOUT, q=stdio_queue)
+sys.stderr = stdio_stderr
+sys.stdout = stdio_stdout
 
 
 @dataclasses.dataclass
@@ -182,12 +189,7 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
 def serve(port: int, shutdown: controller.Servicer, plugin: Plugin):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     server.add_insecure_port(f"{BIND_IP}:{port}")
-
-    # Set up redirection of stderr and stdout.
-    stdio_queue: queue.SimpleQueue = queue.SimpleQueue()
     stdio_servicer = stdio.Servicer(q=stdio_queue, shutdown_ctrl=shutdown)
-    sys.stderr = stdio.Adapter(channel=grpc_stdio_pb2.StdioData.STDERR, q=stdio_queue)
-    sys.stdout = stdio.Adapter(channel=grpc_stdio_pb2.StdioData.STDOUT, q=stdio_queue)
     grpc_stdio_pb2_grpc.add_GRPCStdioServicer_to_server(
         servicer=stdio_servicer, server=server
     )
@@ -208,6 +210,7 @@ def serve(port: int, shutdown: controller.Servicer, plugin: Plugin):
 
 
 def serve_plugin(plugin: Plugin) -> None:
+    _configure_logging()
     port = _find_open_port()
     grpc_controller = controller.Servicer()
     server = serve(port=port, shutdown=grpc_controller, plugin=plugin)
