@@ -1,4 +1,4 @@
-PROTOCOL_VERSION?=v0.11.4
+PROTOCOL_VERSION?=v0.12.0
 INTEGRATION_TEST_BIN=integration-test-$(PROTOCOL_VERSION).$(shell uname -s)-$(shell uname -m)
 INTEGRATION_TEST_PATH=integration_test/$(INTEGRATION_TEST_BIN)
 SATURN_BOT_BIN_PATH?=saturn-bot
@@ -7,6 +7,7 @@ clean:
 	rm saturn_bot/protocol/v1/saturnbot.proto
 	rm saturn_bot/plugin/grpc_controller.proto
 	rm saturn_bot/plugin/grpc_stdio.proto
+	rm -rf $(INTEGRATION_TEST_PATH)
 
 generate: saturn_bot/protocol/v1/saturnbot.proto saturn_bot/plugin/grpc_controller.proto saturn_bot/plugin/grpc_stdio.proto
 	buf generate

@@ -48,6 +48,11 @@ class PluginServiceStub(object):
                 request_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedRequest.SerializeToString,
                 response_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedResponse.FromString,
                 )
+        self.Shutdown = channel.unary_unary(
+                '/protocol.v1.PluginService/Shutdown',
+                request_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ShutdownRequest.SerializeToString,
+                response_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ShutdownResponse.FromString,
+                )
 
 
 class PluginServiceServicer(object):
@@ -89,6 +94,12 @@ class PluginServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Shutdown(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_PluginServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -121,6 +132,11 @@ def add_PluginServiceServicer_to_server(servicer, server):
                     servicer.OnPrMerged,
                     request_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedRequest.FromString,
                     response_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedResponse.SerializeToString,
+            ),
+            'Shutdown': grpc.unary_unary_rpc_method_handler(
+                    servicer.Shutdown,
+                    request_deserializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ShutdownRequest.FromString,
+                    response_serializer=saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ShutdownResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -231,5 +247,22 @@ class PluginService(object):
         return grpc.experimental.unary_unary(request, target, '/protocol.v1.PluginService/OnPrMerged',
             saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedRequest.SerializeToString,
             saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.OnPrMergedResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Shutdown(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/protocol.v1.PluginService/Shutdown',
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ShutdownRequest.SerializeToString,
+            saturn__bot_dot_protocol_dot_v1_dot_saturnbot__pb2.ShutdownResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
