@@ -150,3 +150,11 @@ class OnPrMergedResponse(_message.Message):
     ERROR_FIELD_NUMBER: _ClassVar[int]
     error: str
     def __init__(self, error: _Optional[str] = ...) -> None: ...
+
+class ShutdownRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class ShutdownResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...

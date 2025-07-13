@@ -63,6 +63,14 @@ class Plugin:
     def on_pr_merged(self, ctx: Context):
         pass
 
+    def shutdown(self) -> None:
+        """Executed right before the plugin is shut down.
+
+        Use this method to clean up any resources allocated by the plugin.
+
+        """
+        pass
+
 
 @contextlib.contextmanager
 def in_checkout_dir(d: str) -> Iterator[None]:
@@ -177,6 +185,15 @@ class PluginService(saturnbot_pb2_grpc.PluginServiceServicer):
             return saturnbot_pb2.OnPrMergedResponse(
                 error=traceback.format_exc(),
             )
+
+    def Shutdown(self, request, context) -> saturnbot_pb2.ShutdownResponse:
+        resp = saturnbot_pb2.ShutdownResponse()
+        try:
+            self._plugin.shutdown()
+        except Exception:
+            return resp
+
+        return resp
 
 
 def serve(port: int, shutdown: controller.Servicer, plugin: Plugin):

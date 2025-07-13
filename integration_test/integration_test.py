@@ -77,6 +77,9 @@ class IntegrationTest(Plugin):
         with open(self.event_out_tmp_file_path, "w") as f:
             f.write("Integration Test OnPrMerged")
 
+    def shutdown(self):
+        print("Shutdown called")
+
 
 if __name__ == "__main__":
     serve_plugin(IntegrationTest())

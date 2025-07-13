@@ -24,4 +24,5 @@ jobs:
       - run: make lint
       - run: make test
       - run: go install github.com/wndhydrnt/saturn-bot@main
+      - run: saturn-bot version
       - run: make test_integration
