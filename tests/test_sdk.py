@@ -22,14 +22,17 @@ class UnitTestPlugin(Plugin):
         raise_on_pr_closed: bool = False,
         raise_on_pr_created: bool = False,
         raise_on_pr_merged: bool = False,
+        raise_shutdown: bool = False,
     ):
         self.raise_on_pr_closed = raise_on_pr_closed
         self.raise_on_pr_created = raise_on_pr_created
         self.raise_on_pr_merged = raise_on_pr_merged
+        self.raise_shutdown = raise_shutdown
 
         self.on_pr_closed_called = False
         self.on_pr_created_called = False
         self.on_pr_merged_called = False
+        self.shutdown_called = False
         self.config_key: str = ""
 
     def apply(self, ctx: Context) -> None:
@@ -61,6 +64,12 @@ class UnitTestPlugin(Plugin):
             raise RuntimeError("on_pr_merged failed")
 
         self.on_pr_merged_called = True
+
+    def shutdown(self) -> None:
+        if self.raise_shutdown:
+            raise RuntimeError("shutdown failed")
+
+        self.shutdown_called = True
 
 
 class TaskServiceTest(unittest.TestCase):
@@ -205,6 +214,26 @@ class TaskServiceTest(unittest.TestCase):
 
         self.assertIn("RuntimeError: on_pr_merged failed", response.error)
         self.assertFalse(plugin.on_pr_merged_called)
+
+    def test_Shutdown(self):
+        plugin = UnitTestPlugin()
+        request = saturnbot_pb2.ShutdownRequest()
+
+        service = PluginService(plugin)
+        response = service.Shutdown(request=request, context={})
+
+        self.assertTrue(plugin.shutdown_called)
+        self.assertIsInstance(response, saturnbot_pb2.ShutdownResponse)
+
+    def test_Shutdown__exception(self):
+        plugin = UnitTestPlugin(raise_shutdown=True)
+        request = saturnbot_pb2.ShutdownRequest()
+
+        service = PluginService(plugin)
+        response = service.Shutdown(request=request, context={})
+
+        self.assertFalse(plugin.shutdown_called)
+        self.assertIsInstance(response, saturnbot_pb2.ShutdownResponse)
 
 
 class ServeTest(unittest.TestCase):
